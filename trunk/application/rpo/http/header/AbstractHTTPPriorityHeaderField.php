@@ -79,7 +79,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * @param string $value Valor do cabeçalho
 	 * @param integer $status Código de status
 	 */
-	public function __construct( $name , $value , $status = 200 ){
+	public function __construct( $name , $value , $status = null ){
 		parent::__construct( $name , $value , $status );
 
 		$this->queue = new SplPriorityQueue();
