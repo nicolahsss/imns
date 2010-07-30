@@ -52,89 +52,32 @@
  * @license		http://creativecommons.org/licenses/GPL/2.0/deed.pt
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @package		rpo
- * @subpackage	mvc
+ * @subpackage	http\header\fields
  */
-namespace rpo\mvc;
-
-use rpo\util;
-
-use rpo\http;
-
-use rpo\http\HTTPRequest;
-use rpo\http\HTTPResponse;
-use rpo\http\exception\HTTPException;
-use rpo\http\exception\InternalServerErrorException;
-use rpo\http\header\fields\Protocol;
+namespace rpo\http\header\fields;
 
 /**
- * Controlador principal da aplicação
+ * Implementação do campo de cabeçalho X-Powered-By, um cabeçalho não padrão que pode não ter sido implementado pelo cliente
  * @final
  * @package		rpo
- * @subpackage	mvc
+ * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class Application extends \rpo\mvc\ControllerChain {
+final class XPoweredBy extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
-	 * Objeto de resposta
-	 * @var rpo\http\HTTPResponse
+	 * Constroi o objeto que representa o cabeçalho HTTP X-Powered-By
+	 * @param string $value Valor do campo de cabeçalho
 	 */
-	private $response;
-
-	/**
-	 * Constroi o controlador principal da aplicação
-	 */
-	public function __construct(){
-		parent::__construct();
-
-		$this->response = HTTPResponse::getInstance();
+	public function __construct( $value ){
+		parent::__construct( 'X-Powered-By' , $value );
 	}
 
 	/**
-	 * Cria a exibição padrão de erro
-	 * @param HTTPException $e
-	 * @FIXME Nesse momento estamos fazendo a saída (echo $e->getMessage()) diretamente daqui
-	 * Isso deve ser corrigido com a criação de uma ErrorView, reponsável pela exibição de
-	 * mensagens de erro da aplicação
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
 	 */
-	private function createErrorResponse( HTTPException $e ){
-		$this->getResponse()->getHeaders()->add( new Protocol( Protocol::HTTP_1_1 , $e->getCode() ) );
-		$this->getResponse()->getBody()->getComposite()->clear();
-		$this->getResponse()->show();
-		echo $e->getMessage();
-	}
-
-	/**
-	 * Recupera o objeto de resposta
-	 * @return rpo\http\HTTPResponse
-	 */
-	public function getResponse(){
-		return $this->response;
-	}
-
-	/**
-	 * Repassa a requisição do usuário à todos os controladores anexados
-	 * @param rpo\http\HTTPRequest $request
-	 */
-	public function handle( HTTPRequest $request ){
-		$iterator = $this->getIterator();
-
-		for ( $iterator->rewind() ; $iterator->valid() ; $iterator->next() ){
-			try {
-				$applicationController = $iterator->current();
-
-				if ( $applicationController->canHandle( $request ) ){
-					$applicationController->handle( $request );
-				}
-
-				$this->getResponse()->getHeaders()->add( new \rpo\http\header\fields\XPoweredBy( 'RPO-0.1' ) );
-				$this->getResponse()->show();
-			} catch ( HTTPException $e ){
-				$this->createErrorResponse( $e );
-				break;
-			} catch ( \Exception $e ){
-				$this->createErrorResponse( new InternalServerErrorException( $e->getMessage() , $e ) );
-				break;
-			}
-		}
+	public function accept( $value ){
+		return (bool) preg_match( '/^[A-Za-z0-9\/\.\-\+\=_;:~\(\)\<\>]+$/' , $value );
 	}
 }
