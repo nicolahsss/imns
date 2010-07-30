@@ -132,7 +132,7 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 */
 	public function show(){
 		foreach ( $this->headers as $header ){
-			header( (string) $header , true );
+			header( (string) $header , true , $header->getStatusCode() );
 		}
 
 		$this->body->getComposite()->draw();
