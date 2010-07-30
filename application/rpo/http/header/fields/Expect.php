@@ -57,7 +57,7 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Expect que indica o tipo de média do conteúdo.
+ * Implementação do campo Expect que indica a expectativa do cliente em relação ao servidor
  * @final
  * @package		rpo
  * @subpackage	http\header\fields

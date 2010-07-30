@@ -57,7 +57,7 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Last-Modified que indica o tipo de média do conteúdo.
+ * Implementação do campo Last-Modified que indica a data e a hora da última modificação do objeto solicitado.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -70,5 +70,14 @@ class LastModified extends \rpo\http\header\AbstractHTTPHeaderField {
 	 */
 	public function __construct( $value ){
 		parent::__construct( 'Last-Modified' , $value );
+	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return gmdate( 'D, d M Y H:i:s T' , strtotime( $value ) ) == $value ;
 	}
 }
