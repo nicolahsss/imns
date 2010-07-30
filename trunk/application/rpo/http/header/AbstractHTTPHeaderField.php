@@ -85,7 +85,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @access	private
 	 * @var		integer
 	 */
-	private $status = 200;
+	private $status;
 
 	/**
 	 * Constroi um novo campo de cabeçalho
@@ -93,8 +93,9 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @param string $value Valor do campo de cabeçalho
 	 * @param integer $status Código de status do cabeçalho
 	 */
-	public function __construct( $name , $value , $status = 200 ){
+	public function __construct( $name , $value , $status = null ){
 		$this->name = $name;
+		$this->status = $status;
 		$this->setValue( $value );
 	}
 
