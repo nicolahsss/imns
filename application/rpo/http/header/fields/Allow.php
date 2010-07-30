@@ -71,4 +71,24 @@ final class Allow extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Allow' , $value );
 	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		var_dump( $value );
+
+		return true;
+		switch ( $value ){
+			case \rpo\http\HTTPRequestMethod::GET:
+			case \rpo\http\HTTPRequestMethod::POST:
+			case \rpo\http\HTTPRequestMethod::PUT:
+			case \rpo\http\HTTPRequestMethod::DELETE:
+				return true;
+		}
+
+		return false;
+	}
 }

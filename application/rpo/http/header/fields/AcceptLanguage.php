@@ -73,4 +73,13 @@ final class AcceptLanguage extends \rpo\http\header\AbstractHTTPPriorityHeaderFi
 	public function __construct( $value ){
 		parent::__construct( 'Accept-Language' , $value );
 	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return (bool) preg_match( '/[a-zA-Z-]+/' , $value );
+	}
 }

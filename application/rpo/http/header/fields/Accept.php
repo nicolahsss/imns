@@ -73,4 +73,13 @@ final class Accept extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Accept' , $value );
 	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return (bool) preg_match( '/^[a-z0-9\/,\+;\=\*\.]+$/' , $value );
+	}
 }
