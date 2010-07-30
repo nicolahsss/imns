@@ -1,4 +1,4 @@
-<?php
+<?php /* $Revision$ */
 
 require '../application/config.php';
 
