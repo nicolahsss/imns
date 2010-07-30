@@ -53,7 +53,6 @@
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @package		rpo
  * @subpackage	base
- * @version     $Id$
  */
 namespace rpo\base;
 
