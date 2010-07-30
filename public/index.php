@@ -1,4 +1,5 @@
-<?php
+<?php /* $Id$ */
+
 require '../application/config.php';
 
 use rpo\mvc\Application;
