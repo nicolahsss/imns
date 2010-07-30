@@ -57,7 +57,7 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-Type que indica o tipo de média do conteúdo.
+ * Implementação do campo Content-Type que indica o tipo de media do conteúdo.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -70,5 +70,14 @@ class ContentType extends \rpo\http\header\AbstractHTTPHeaderField {
 	 */
 	public function __construct( $value ){
 		parent::__construct( 'Content-Type' , $value );
+	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return (bool) preg_match( '/\w+\/\w+(\+\w+)?(;\s*charset\=[A-Za-z0-9]+(\-[A-Za-z0-9]+)*)?$/' , $value );
 	}
 }
