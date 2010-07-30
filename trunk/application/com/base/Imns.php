@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Licenciado sobre os termos da CC-GNU GPL versão 2.0 ou posterior.
  *
@@ -105,7 +104,7 @@ final class Imns extends \rpo\mvc\ControllerChain
     /**
      * Verifica se o controlador manipula a requisição
      * @param rpo\http\HTTPRequest $request
-     * @return boolean;
+     * @return boolean
      */
     public function canHandle(HTTPRequest $request)
     {
@@ -113,8 +112,11 @@ final class Imns extends \rpo\mvc\ControllerChain
         $headers = $this->getResponse()->getHeaders();
 
         if (( $method == HTTPRequestMethod::GET ) || ( $method == HTTPRequestMethod::POST )) {
+            
             foreach ($request->getHeaders() as $header) {
+
                 switch ($header->getClass()->getName()) {
+
                     case 'rpo\http\header\fields\Accept':
                         $acceptable = false;
 
@@ -132,16 +134,15 @@ final class Imns extends \rpo\mvc\ControllerChain
                         if (!$acceptable) {
                             throw new \rpo\http\exception\NotAcceptableException('Not Acceptable');
                         }
-
                         break;
-                    case 'rpo\http\header\fields\AcceptLanguage':
+                        
+                    case 'rpo\http\header\fields\AcceptLanguage':                        
                         $acceptable = false;
 
                         foreach ($header as $priority) {
                             if (( $priority == '*' ) || in_array($priority, $this->languages)) {
                                 $acceptable = true;
-                                $contentLanguage = $priority == '*' ? array_shift($this->contentLanguages) : $priority;
-
+                                $contentLanguage = ($priority == '*') ? array_shift($this->contentLanguages) : $priority;
                                 $headers->add(new \rpo\http\header\fields\ContentLanguage($contentLanguage));
                             }
                         }
@@ -149,9 +150,9 @@ final class Imns extends \rpo\mvc\ControllerChain
                         if (!$acceptable) {
                             throw new \rpo\http\exception\NotAcceptableException('Not Acceptable');
                         }
-
                         break;
-                    case 'rpo\http\header\fields\Connection':
+
+                    case 'rpo\http\header\fields\Connection':                        
                         $value = $header->getValue();
 
                         if (( $value == 'keep-alive' ) || ( $value == 'close' )) {
@@ -159,9 +160,9 @@ final class Imns extends \rpo\mvc\ControllerChain
                         } else {
                             throw new \rpo\http\exception\BadRequestException('Bad Request');
                         }
-
                         break;
-                    case 'rpo\http\header\fields\KeepAlive':
+
+                    case 'rpo\http\header\fields\KeepAlive':                        
                         $keepAlive = $header->getValue();
 
                         if ((int) $keepAlive == $keepAlive) {
@@ -169,13 +170,15 @@ final class Imns extends \rpo\mvc\ControllerChain
                         } else {
                             throw new \rpo\http\exception\BadRequestException('Bad Request');
                         }
-
                         break;
-                    case 'rpo\http\header\fields\AcceptCharset':
-                        \rpo\base\String::setDefaultEncoding($header->getValue());
+
+                    case 'rpo\http\header\fields\AcceptCharset':                        
+                        \rpo\base\String::setDefaultEncoding($header->getValue());                        
                         break;
                 }
+                
             }
+            
         } else {
             $headers->add(new \rpo\http\header\fields\Allow('GET, POST'));
             throw new \rpo\http\exception\MethodNotAllowedException('Método não permitido');
