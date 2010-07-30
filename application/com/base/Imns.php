@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Licenciado sobre os termos da CC-GNU GPL versão 2.0 ou posterior.
  *
@@ -52,7 +53,9 @@
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @package		com
  * @subpackage	base
+ * @version     $Id$
  */
+
 namespace com\base;
 
 use rpo\mvc\Controller;
@@ -63,128 +66,135 @@ use rpo\http\HTTPRequestMethod;
 /**
  * Controlador base da rede social
  * @final
+ * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @package		com
  * @subpackage	base
- * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
+ * @version     $Id$
  */
-final class Imns extends \rpo\mvc\ControllerChain {
-	/**
-	 * @var com\math\MathView
-	 */
-	private $view;
+final class Imns extends \rpo\mvc\ControllerChain
+{
 
-	/**
-	 * Lista de Content-Types que poderão ser enviados como Accept pelo usuário
-	 * e que são aceitos pela aplicação.
-	 * @var array
-	 */
-	private $contentTypes = array( 'text/html' , 'application/xhtml+xml' );
+    /**
+     * @var com\math\MathView
+     */
+    private $view;
 
-	/**
-	 * Lista de idiomas que poderão ser enviados como Accept-Language pelo usuário
-	 * e que são aceitos pela aplicação.
-	 * @var array
-	 */
-	private $languages = array( 'pt-br' );
+    /**
+     * Lista de Content-Types que poderão ser enviados como Accept pelo usuário
+     * e que são aceitos pela aplicação.
+     * @var array
+     */
+    private $contentTypes = array('text/html', 'application/xhtml+xml');
 
-	/**
-	 * Configura o controlador
-	 * @param rpo\mvc\ControllerChain $controller
-	 */
-	protected function configure( ControllerChain $controller ){
-		//TODO: Adicionar os controladores da rede social
-	}
+    /**
+     * Lista de idiomas que poderão ser enviados como Accept-Language pelo usuário
+     * e que são aceitos pela aplicação.
+     * @var array
+     */
+    private $languages = array('pt-br');
+    
+    /**
+     * Configura o controlador
+     * @param rpo\mvc\ControllerChain $controller
+     */
+    protected function configure(ControllerChain $controller)
+    {
+        //TODO: Adicionar os controladores da rede social
+    }
 
-	/**
-	 * Verifica se o controlador manipula a requisição
-	 * @param rpo\http\HTTPRequest $request
-	 * @return boolean;
-	 */
-	public function canHandle( HTTPRequest $request ){
-		$method = $request->getMethod();
-		$headers = $this->getResponse()->getHeaders();
+    /**
+     * Verifica se o controlador manipula a requisição
+     * @param rpo\http\HTTPRequest $request
+     * @return boolean;
+     */
+    public function canHandle(HTTPRequest $request)
+    {
+        $method = $request->getMethod();
+        $headers = $this->getResponse()->getHeaders();
 
-		if ( ( $method == HTTPRequestMethod::GET ) || ( $method == HTTPRequestMethod::POST ) ){
-			foreach ( $request->getHeaders() as $header ){
-				switch ( $header->getClass()->getName() ){
-					case 'rpo\http\header\fields\Accept':
-						$acceptable = false;
+        if (( $method == HTTPRequestMethod::GET ) || ( $method == HTTPRequestMethod::POST )) {
+            foreach ($request->getHeaders() as $header) {
+                switch ($header->getClass()->getName()) {
+                    case 'rpo\http\header\fields\Accept':
+                        $acceptable = false;
 
-						foreach ( $header as $priority ){
-							if ( ( $priority == '*' ) || in_array( $priority , $this->contentTypes ) ){
-								$acceptable = true;
-								$contentType = $priority == '*' ? array_shift( $this->acceptable ) : $priority;
+                        foreach ($header as $priority) {
+                            if (( $priority == '*' ) || in_array($priority, $this->contentTypes)) {
+                                $acceptable = true;
+                                $contentType = $priority == '*' ? array_shift($this->acceptable) : $priority;
 
-								$headers->add( new \rpo\http\header\fields\ContentType( $contentType ) );
+                                $headers->add(new \rpo\http\header\fields\ContentType($contentType));
 
-								break;
-							}
-						}
+                                break;
+                            }
+                        }
 
-						if ( !$acceptable ){
-							throw new \rpo\http\exception\NotAcceptableException( 'Not Acceptable' );
-						}
+                        if (!$acceptable) {
+                            throw new \rpo\http\exception\NotAcceptableException('Not Acceptable');
+                        }
 
-						break;
-					case 'rpo\http\header\fields\AcceptLanguage':
-						$acceptable = false;
+                        break;
+                    case 'rpo\http\header\fields\AcceptLanguage':
+                        $acceptable = false;
 
-						foreach ( $header as $priority ){
-							if ( ( $priority == '*' ) || in_array( $priority , $this->languages ) ){
-								$acceptable = true;
-								$contentLanguage = $priority == '*' ? array_shift( $this->contentLanguages ) : $priority;
+                        foreach ($header as $priority) {
+                            if (( $priority == '*' ) || in_array($priority, $this->languages)) {
+                                $acceptable = true;
+                                $contentLanguage = $priority == '*' ? array_shift($this->contentLanguages) : $priority;
 
-								$headers->add( new \rpo\http\header\fields\ContentLanguage( $contentLanguage ) );
-							}
-						}
+                                $headers->add(new \rpo\http\header\fields\ContentLanguage($contentLanguage));
+                            }
+                        }
 
-						if ( !$acceptable ){
-							throw new \rpo\http\exception\NotAcceptableException( 'Not Acceptable' );
-						}
+                        if (!$acceptable) {
+                            throw new \rpo\http\exception\NotAcceptableException('Not Acceptable');
+                        }
 
-						break;
-					case 'rpo\http\header\fields\Connection':
-						$value = $header->getValue();
+                        break;
+                    case 'rpo\http\header\fields\Connection':
+                        $value = $header->getValue();
 
-						if ( ( $value == 'keep-alive' ) || ( $value == 'close' ) ){
-							$headers->add( new \rpo\http\header\fields\Connection( $value ) );
-						} else {
-							throw new \rpo\http\exception\BadRequestException( 'Bad Request' );
-						}
+                        if (( $value == 'keep-alive' ) || ( $value == 'close' )) {
+                            $headers->add(new \rpo\http\header\fields\Connection($value));
+                        } else {
+                            throw new \rpo\http\exception\BadRequestException('Bad Request');
+                        }
 
-						break;
-					case 'rpo\http\header\fields\KeepAlive':
-						$keepAlive = $header->getValue();
+                        break;
+                    case 'rpo\http\header\fields\KeepAlive':
+                        $keepAlive = $header->getValue();
 
-						if ( (int) $keepAlive == $keepAlive ){
-							$headers->add( new \rpo\http\header\fields\KeepAlive( (int) $keepAlive ) );
-						} else {
-							throw new \rpo\http\exception\BadRequestException( 'Bad Request' );
-						}
+                        if ((int) $keepAlive == $keepAlive) {
+                            $headers->add(new \rpo\http\header\fields\KeepAlive((int) $keepAlive));
+                        } else {
+                            throw new \rpo\http\exception\BadRequestException('Bad Request');
+                        }
 
-						break;
-					case 'rpo\http\header\fields\AcceptCharset':
-						\rpo\base\String::setDefaultEncoding( $header->getValue() );
-						break;
-				}
-			}
-		} else {
-			$headers->add( new \rpo\http\header\fields\Allow( 'GET, POST' ) );
-			throw new \rpo\http\exception\MethodNotAllowedException( 'Método não permitido' );
-		}
+                        break;
+                    case 'rpo\http\header\fields\AcceptCharset':
+                        \rpo\base\String::setDefaultEncoding($header->getValue());
+                        break;
+                }
+            }
+        } else {
+            $headers->add(new \rpo\http\header\fields\Allow('GET, POST'));
+            throw new \rpo\http\exception\MethodNotAllowedException('Método não permitido');
+        }
 
-		return parent::canHandle( $request );
-	}
+        return parent::canHandle($request);
+    }
 
-	/**
-	 * Manipula a requisição do usuário
-	 * @param rpo\http\HTTPRequest $request
-	 */
-	public function handle( HTTPRequest $request ){
-		foreach ( $this->getIterator() as $controller ){
-			if ( $controller->canHandle( $request ) ){
-				$controller->handle( $request );
-			}
-		}
-	}
+    /**
+     * Manipula a requisição do usuário
+     * @param rpo\http\HTTPRequest $request
+     */
+    public function handle(HTTPRequest $request)
+    {
+        foreach ($this->getIterator() as $controller) {
+            if ($controller->canHandle($request)) {
+                $controller->handle($request);
+            }
+        }
+    }
+
 }
