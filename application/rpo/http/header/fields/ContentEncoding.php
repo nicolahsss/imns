@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-Encoding que serve para descrever o idioma
+ * Implementação do campo Content-Encoding que é utilizado como modificador do tipo de media. Quando presente
+ * indica que uma codificação adicional foi aplicada ao conteúdo.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -71,13 +72,13 @@ final class ContentEncoding extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Content-Encoding' , $value );
 	}
-	
+
 	/**
 	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
 	 * @return boolean
 	 * @param string $value
 	 */
 	public function accept( $value ){
-		return (bool) preg_match( '/\w+/' , $value );
+		return (bool) preg_match( '/^\w+$/' , $value );
 	}
 }

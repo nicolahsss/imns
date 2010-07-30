@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-Location que serve para descrever o idioma
+ * Implementação do campo Content-Location que pode ser utilizado para fornecer a localização de um recurso incluído
+ * na resposta, quando esse recurso é acessível de uma localização separada.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -71,13 +72,13 @@ final class ContentLocation extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Content-Location' , $value );
 	}
-	
+
 	/**
 	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
 	 * @return boolean
 	 * @param string $value
 	 */
 	public function accept( $value ){
-		return (bool) preg_match( '/\w+/' , $value );
+		return (bool) preg_match( '/(ftp|http)s?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/' , $value );
 	}
 }
