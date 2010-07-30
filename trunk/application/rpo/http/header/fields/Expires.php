@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Expires que indica o tipo de média do conteúdo.
+ * Implementação do campo Expires que indica a data e hora em que o conteúdo será considerado obsoleto.
+ * Caso o campo Cache-Control contenha a diretiva max-age, esta substituirá o valor de Expires.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -70,5 +71,14 @@ class Expires extends \rpo\http\header\AbstractHTTPHeaderField {
 	 */
 	public function __construct( $value ){
 		parent::__construct( 'Expires' , $value );
+	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return gmdate( 'D, d M Y H:i:s T' , strtotime( $value ) ) == $value ;
 	}
 }

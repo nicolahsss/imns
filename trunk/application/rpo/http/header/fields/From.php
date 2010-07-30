@@ -57,7 +57,7 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo From que indica o tipo de média do conteúdo.
+ * Implementação do campo From que indica o e-mail do cliente.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -70,5 +70,14 @@ class From extends \rpo\http\header\AbstractHTTPHeaderField {
 	 */
 	public function __construct( $value ){
 		parent::__construct( 'From' , $value );
+	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return (bool) preg_match( '/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/' , $value ) ;
 	}
 }

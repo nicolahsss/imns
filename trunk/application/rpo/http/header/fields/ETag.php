@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo ETag que indica o tipo de média do conteúdo.
+ * Implementação do campo ETag, que indica um identificador único de um recurso.
+ * É usado em conjunto com If-Match, If-None-Match e Vary.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -71,4 +72,5 @@ class ETag extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'ETag' , $value );
 	}
+
 }
