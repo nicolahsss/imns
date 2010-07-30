@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-Length que serve para descrever o idioma
+ * Implementação do campo Content-Length que indica o tamanho do conteúdo do corpo da requisição ou
+ * resposta.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -71,7 +72,7 @@ final class ContentLength extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Content-Length' , $value );
 	}
-	
+
 	/**
 	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
 	 * @return boolean

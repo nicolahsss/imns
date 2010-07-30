@@ -57,8 +57,10 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-MD5 que serve para descrever o idioma
+ * Implementação do campo Content-MD5, definido pela RFC 1864; Content-MD5 é o digest do corpo para o propósito de
+ * prover uma checagem de integridade, ponto-a-ponto, do conteúdo.
  * @final
+ * @link		http://www.w3.org/Protocols/rfc2616/rfc2616-sec17.html#bib23
  * @package		rpo
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
@@ -71,13 +73,13 @@ final class ContentMD5 extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Content-MD5' , $value );
 	}
-	
+
 	/**
 	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
 	 * @return boolean
 	 * @param string $value
 	 */
 	public function accept( $value ){
-		return (bool) preg_match( '/\w+/' , $value );
+		return (bool) preg_match( '//^[a-zA-Z0-9\+\=]+$//' , $value );
 	}
 }
