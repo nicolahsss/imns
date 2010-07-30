@@ -46,7 +46,7 @@
  * DE DADOS OU DADOS SENDO GERADOS DE FORMA IMPRECISA, PERDAS SOFRIDAS POR VOCÊ OU TERCEIROS OU A IMPOSSIBILIDADE DO
  * PROGRAMA DE OPERAR COM QUAISQUER OUTROS PROGRAMAS), MESMO QUE ESSE TITULAR, OU OUTRA PARTE, TENHA SIDO ALERTADA
  * SOBRE A POSSIBILIDADE DE OCORRÊNCIA DESSES DANOS.
- *
+ *extends \rpo\http\exception\HTTPException {
  * @author		João Batista Neto
  * @copyright	Copyright(c) 2010, João Batista Neto
  * @license		http://creativecommons.org/licenses/GPL/2.0/deed.pt
@@ -63,5 +63,5 @@ namespace rpo\http\exception;
  * @subpackage	http\exception
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractServerException extends \RuntimeException {
+abstract class AbstractServerException extends \rpo\http\exception\HTTPException {
 }
