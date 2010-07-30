@@ -73,4 +73,13 @@ class AcceptEncoding extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Accept-Encoding' , $value );
 	}
+
+	/**
+	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
+	 * @return boolean
+	 * @param string $value
+	 */
+	public function accept( $value ){
+		return (bool) preg_match( '/\w+/' , $value );
+	}
 }
