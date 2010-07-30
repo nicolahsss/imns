@@ -1,10 +1,4 @@
 <?php
-/**
- * $Rev::               $:
- * $Author::            $:
- * $Date::              $:
- * $Id::                $:
- */
 
 require '../application/config.php';
 
