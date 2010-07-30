@@ -1,4 +1,4 @@
-<?php /* $Id$ */
+<?php
 
 require '../application/config.php';
 
