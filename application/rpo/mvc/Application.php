@@ -58,6 +58,9 @@ namespace rpo\mvc;
 
 use rpo\http\HTTPRequest;
 use rpo\http\HTTPResponse;
+use rpo\http\exception\HTTPException;
+use rpo\http\exception\InternalServerErrorException;
+use rpo\http\header\fields\Protocol;
 
 /**
  * Controlador principal da aplicação
@@ -80,6 +83,20 @@ final class Application extends \rpo\mvc\ControllerChain {
 		parent::__construct();
 
 		$this->response = HTTPResponse::getInstance();
+	}
+
+	/**
+	 * Cria a exibição padrão de erro
+	 * @param HTTPException $e
+	 * @FIXME Nesse momento estamos fazendo a saída (echo $e->getMessage()) diretamente daqui
+	 * Isso deve ser corrigido com a criação de uma ErrorView, reponsável pela exibição de
+	 * mensagens de erro da aplicação
+	 */
+	private function createErrorResponse( HTTPException $e ){
+		$this->getResponse()->getHeaders()->add( new Protocol( Protocol::HTTP_1_1 , $e->getCode() ) );
+		$this->getResponse()->getBody()->getComposite()->clear();
+		$this->getResponse()->show();
+		echo $e->getMessage();
 	}
 
 	/**
@@ -106,10 +123,11 @@ final class Application extends \rpo\mvc\ControllerChain {
 				}
 
 				$this->getResponse()->show();
-			} catch ( \rpo\http\exception\AbstractClientException $e ){
-				$this->getResponse()->getBody()->getComposite()->clear();
-				echo $e->getMessage();
+			} catch ( HTTPException $e ){
+				$this->createErrorResponse( $e );
 				break;
+			} catch ( \Exception $e ){
+				$this->createErrorResponse( new InternalServerErrorException( $e->getMessage() , $e ) );
 			}
 		}
 	}
