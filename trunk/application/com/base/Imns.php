@@ -1,5 +1,5 @@
 <?php
-/**
+/** $Id$
  * Licenciado sobre os termos da CC-GNU GPL versão 2.0 ou posterior.
  *
  * A GNU General Public License é uma licença de Software Livre ("Free Software").
