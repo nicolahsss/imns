@@ -57,7 +57,8 @@
 namespace rpo\http\header\fields;
 
 /**
- * Implementação do campo Content-Range que serve para descrever o idioma
+ * Implementação do campo Content-Range que serve especificar que de todo o conteúdo, apenas
+ * uma parcela deve ser aplicada.
  * @final
  * @package		rpo
  * @subpackage	http\header\fields
@@ -71,13 +72,13 @@ final class ContentRange extends \rpo\http\header\AbstractHTTPHeaderField {
 	public function __construct( $value ){
 		parent::__construct( 'Content-Range' , $value );
 	}
-	
+
 	/**
 	 * Valida o valor de um campo de cabeçalho antes de aceitar seu valor
 	 * @return boolean
 	 * @param string $value
 	 */
 	public function accept( $value ){
-		return (bool) preg_match( '/\w+/' , $value );
+		return (bool) preg_match( '/^bytes [0-9]+-[1-9][0-9]*\/[1-9][0-9]*$/' , $value );
 	}
 }
