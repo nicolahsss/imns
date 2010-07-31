@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -57,7 +57,7 @@
 namespace rpo\http;
 
 use rpo\gui\Root;
-use \stdClass;
+use stdClass;
 
 /**
  * Implementação do corpo de uma requisição ou resposta HTTP
@@ -65,7 +65,7 @@ use \stdClass;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class HTTPBody extends \rpo\base\Object {
+class HTTPBody extends rpo\base\Object {
 	/**
 	 * Objeto da composição da interface de usuário
 	 * @var \rpo\gui\Root
@@ -81,7 +81,7 @@ class HTTPBody extends \rpo\base\Object {
 	/**
 	 * Constroi o objeto de corpo da requisição ou resposta
 	 */
-	public function __construct(){
+	public function __construct() {
 		$this->composite = new Root();
 		$this->data = new stdClass();
 	}
@@ -90,7 +90,7 @@ class HTTPBody extends \rpo\base\Object {
 	 * Recupera o Componente root
 	 * @return \rpo\gui\Root
 	 */
-	public function getComposite(){
+	public function getComposite() {
 		return $this->composite;
 	}
 
@@ -98,7 +98,7 @@ class HTTPBody extends \rpo\base\Object {
 	 * Recupera o objeto de dados
 	 * @return \stdClass
 	 */
-	public function getData(){
+	public function getData() {
 		return $this->data;
 	}
 }

@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,30 +56,30 @@
  */
 namespace rpo\http\exception;
 
-use \Exception;
+use Exception;
 
 /**
- *  The resource identified by the request is only capable of generating response entities which have content
- *  characteristics not acceptable according to the accept headers sent in the request.
- *  <p>
- *  Unless it was a HEAD request, the response SHOULD include an entity containing a list of available entity
- *  characteristics and location(s) from which the user or user agent can choose the one most appropriate.
- *  The entity format is specified by the media type given in the Content-Type header field. Depending upon the
- *  format and the capabilities of the user agent, selection of the most appropriate choice MAY be performed
- *  automatically.
- *  </p>
+ * The resource identified by the request is only capable of generating response entities which have content
+ * characteristics not acceptable according to the accept headers sent in the request.
+ * <p>
+ * Unless it was a HEAD request, the response SHOULD include an entity containing a list of available entity
+ * characteristics and location(s) from which the user or user agent can choose the one most appropriate.
+ * The entity format is specified by the media type given in the Content-Type header field. Depending upon the
+ * format and the capabilities of the user agent, selection of the most appropriate choice MAY be performed
+ * automatically.
+ * </p>
  * @final
  * @package		rpo
  * @subpackage	http\exception
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class NotAcceptableException extends \rpo\http\exception\AbstractClientException {
+final class NotAcceptableException extends rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção
 	 * @param \Exception $parent
 	 */
-	public function __construct( $message , Exception $previous = null ){
+	public function __construct( $message , Exception $previous = null ) {
 		parent::__construct( $message , 406 , $previous );
 	}
 }

@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,14 +56,11 @@
  */
 namespace rpo\mvc;
 
-use rpo\util;
-
-use rpo\http;
-
 use rpo\http\HTTPRequest;
 use rpo\http\HTTPResponse;
 use rpo\http\exception\HTTPException;
 use rpo\http\exception\InternalServerErrorException;
+use rpo\http\exception\BadRequestException;
 use rpo\http\header\fields\Protocol;
 
 /**
@@ -73,7 +70,7 @@ use rpo\http\header\fields\Protocol;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class Application extends \rpo\mvc\ControllerChain {
+final class Application extends rpo\mvc\ControllerChain {
 	/**
 	 * Objeto de resposta
 	 * @var rpo\http\HTTPResponse
@@ -83,7 +80,7 @@ final class Application extends \rpo\mvc\ControllerChain {
 	/**
 	 * Constroi o controlador principal da aplicação
 	 */
-	public function __construct(){
+	public function __construct() {
 		parent::__construct();
 
 		$this->response = HTTPResponse::getInstance();
@@ -96,7 +93,7 @@ final class Application extends \rpo\mvc\ControllerChain {
 	 * Isso deve ser corrigido com a criação de uma ErrorView, reponsável pela exibição de
 	 * mensagens de erro da aplicação
 	 */
-	private function createErrorResponse( HTTPException $e ){
+	private function createErrorResponse( HTTPException $e ) {
 		$this->getResponse()->getHeaders()->add( new Protocol( Protocol::HTTP_1_1 , $e->getCode() ) );
 		$this->getResponse()->getBody()->getComposite()->clear();
 		$this->getResponse()->show();
@@ -107,7 +104,7 @@ final class Application extends \rpo\mvc\ControllerChain {
 	 * Recupera o objeto de resposta
 	 * @return rpo\http\HTTPResponse
 	 */
-	public function getResponse(){
+	public function getResponse() {
 		return $this->response;
 	}
 
@@ -115,25 +112,32 @@ final class Application extends \rpo\mvc\ControllerChain {
 	 * Repassa a requisição do usuário à todos os controladores anexados
 	 * @param rpo\http\HTTPRequest $request
 	 */
-	public function handle( HTTPRequest $request ){
+	public function handle( HTTPRequest $request ) {
 		$iterator = $this->getIterator();
+		$handled = false;
 
-		for ( $iterator->rewind() ; $iterator->valid() ; $iterator->next() ){
+		for ( $iterator->rewind() ; $iterator->valid() ; $iterator->next() ) {
 			try {
 				$applicationController = $iterator->current();
 
-				if ( $applicationController->canHandle( $request ) ){
+				if ( $applicationController->canHandle( $request ) ) {
 					$applicationController->handle( $request );
+
+					$handled = true;
 				}
 
 				$this->getResponse()->getHeaders()->add( new \rpo\http\header\fields\XPoweredBy( 'RPO-0.1' ) );
 				$this->getResponse()->show();
-			} catch ( HTTPException $e ){
+			} catch ( HTTPException $e ) {
 				$this->createErrorResponse( $e );
 				break;
-			} catch ( \Exception $e ){
+			} catch ( Exception $e ) {
 				$this->createErrorResponse( new InternalServerErrorException( $e->getMessage() , $e ) );
 				break;
+			}
+
+			if (  !$handled ) {
+				$this->createErrorResponse( new BadRequestException( 'Requisição inválida' ) );
 			}
 		}
 	}

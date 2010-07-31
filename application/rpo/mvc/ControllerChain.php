@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\mvc;
 
-use \RuntimeException;
+use RuntimeException;
 use rpo\mvc\ControllerList;
 use rpo\http\HTTPResponse;
 use rpo\http\HTTPRequest;
@@ -67,7 +67,7 @@ use rpo\http\HTTPRequest;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Controller, \IteratorAggregate {
+abstract class ControllerChain extends rpo\base\Object implements rpo\mvc\Controller, IteratorAggregate {
 	/**
 	 * Lista de controladores
 	 * @access	private
@@ -92,7 +92,7 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	/**
 	 * Constroi o objeto de encadeamento de controladores
 	 */
-	public function __construct(){
+	public function __construct() {
 		$this->controllers = new ControllerList();
 	}
 
@@ -101,8 +101,8 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * @param \rpo\mvc\ControllerChain $controller
 	 * @return boolean TRUE se o controlador tiver sido anexado com sucesso
 	 */
-	public function attach( ControllerChain $controller ){
-		if ( !$this->controllers->contains( $controller ) ){
+	public function attach( ControllerChain $controller ) {
+		if (  !$this->controllers->contains( $controller ) ) {
 			$this->controllers->add( $controller );
 			$controller->setPrevious( $this );
 			$controller->configure( $this );
@@ -118,13 +118,13 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * @param \rpo\http\HTTPRequest $request
 	 * @return boolean;
 	 */
-	public function canHandle( HTTPRequest $request ){
+	public function canHandle( HTTPRequest $request ) {
 		$iterator = $this->getIterator();
 
-		for ( $iterator->rewind() ; $iterator->valid() ; $iterator->next() ){
+		for ( $iterator->rewind() ; $iterator->valid() ; $iterator->next() ) {
 			$controller = $iterator->current();
 
-			if ( $controller->canHandle( $request ) ){
+			if ( $controller->canHandle( $request ) ) {
 				return true;
 			}
 		}
@@ -136,7 +136,7 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * Configura o controlador
 	 * @param rpo\mvc\ControllerChain $controller
 	 */
-	protected function configure( ControllerChain $controller ){
+	protected function configure( ControllerChain $controller ) {
 	}
 
 	/**
@@ -144,17 +144,17 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * @param \rpo\mvc\ControllerChain $controller
 	 * @return boolean TRUE se o controlador tiver sido removido
 	 */
-	public function detach( ControllerChain $controller ){
+	public function detach( ControllerChain $controller ) {
 		$this->controllers->detach( $controller );
 
-		return !$this->controllers->contains( $controller );
+		return  !$this->controllers->contains( $controller );
 	}
 
 	/**
 	 * Recupera um iterator de controladores
 	 * @return \Iterator
 	 */
-	public function getIterator(){
+	public function getIterator() {
 		return $this->controllers->getIterator();
 	}
 
@@ -162,14 +162,14 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * Recupera a resposta
 	 * @return \rpo\http\HTTPResponse
 	 */
-	public function getResponse(){
+	public function getResponse() {
 		$ret = null;
 
-		if ( $this->previous instanceOf Controller ){
+		if ( $this->previous instanceof Controller ) {
 			$ret = $this->previous->getResponse();
 		}
 
-		if ( $ret instanceOf HTTPResponse ){
+		if ( $ret instanceof HTTPResponse ) {
 			return $ret;
 		} else {
 			throw new RuntimeException( 'Sem resposta.' );
@@ -180,7 +180,7 @@ abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Cont
 	 * Define o controlador anterior
 	 * @param \rpo\mvc\ControllerChain $controller
 	 */
-	public function setPrevious( ControllerChain $controller ){
+	public function setPrevious( ControllerChain $controller ) {
 		$this->previous = $controller;
 	}
 }

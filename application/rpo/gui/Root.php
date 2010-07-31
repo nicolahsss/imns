@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -64,28 +64,28 @@ use rpo\gui\composite\Component;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class Root extends \rpo\gui\composite\Composite {
+class Root extends rpo\gui\composite\Composite {
 	/**
 	 * O componente Root não pode ser filho de nenhum outro componente
 	 * @final
 	 * @param Component $father
 	 * @throws \LogicException
 	 */
-	final public function setFather( Component $father = null ){
+	final public function setFather( Component $father = null ) {
 		throw new LogicException( 'Root não pode ser adicionado como filho.' );
 	}
 
 	/**
 	 * Remove todos os filhos do componente
 	 */
-	final public function clear(){
+	final public function clear() {
 		$this->childs->clear();
 	}
 
 	/**
 	 * Desenha o componente
 	 */
-	public function draw(){
+	public function draw() {
 		$this->drawAll();
 	}
 }

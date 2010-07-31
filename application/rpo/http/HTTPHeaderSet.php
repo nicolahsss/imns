@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\http;
 
-use \ReflectionClass;
+use ReflectionClass;
 use rpo\base\BaseObject;
 use rpo\http\header\fields\Accept;
 
@@ -66,15 +66,15 @@ use rpo\http\header\fields\Accept;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class HTTPHeaderSet extends \rpo\util\AbstractSet {
+class HTTPHeaderSet extends rpo\util\AbstractSet {
 	/**
 	 * Constroi o Set de cabeçalhos HTTP
 	 * @param array $headers
 	 */
-	public function __construct( array $headers = null ){
+	public function __construct( array $headers = null ) {
 		parent::__construct();
 
-		if ( !is_null( $headers ) ){
+		if (  !is_null( $headers ) ) {
 			$this->parse( $headers );
 		}
 	}
@@ -84,8 +84,8 @@ class HTTPHeaderSet extends \rpo\util\AbstractSet {
 	 * @param \rpo\base\BaseObject $object
 	 * @return boolean
 	 */
-	protected function accept( BaseObject $object ){
-		if ( parent::accept( $object ) ){
+	protected function accept( BaseObject $object ) {
+		if ( parent::accept( $object ) ) {
 			return $object->getClass()->implementsInterface( 'rpo\http\header\HTTPHeaderField' );
 		}
 	}
@@ -94,15 +94,15 @@ class HTTPHeaderSet extends \rpo\util\AbstractSet {
 	 * Recebe a lista de campos de cabeçalho e converte nos respectivos objetos
 	 * @param array $headers
 	 */
-	private function parse( array $headers ){
-		foreach ( $headers as $field => $value ){
+	private function parse( array $headers ) {
+		foreach ( $headers as $field => $value ) {
 			try {
-				$class = new ReflectionClass( sprintf( 'rpo\http\header\fields\%s' , preg_replace( '/-/' , null  , $field ) ) );
+				$class = new ReflectionClass( sprintf( 'rpo\http\header\fields\%s' , preg_replace( '/-/' , null , $field ) ) );
 
 				$this->add( $class->newInstance( $value ) );
-			} catch ( ReflectionException $e ){
+			} catch ( ReflectionException $e ) {
 				//FIXME: Implementar o restante dos cabeçalhos HTTP
-				printf( 'opz, cabeçalho HTTP "rpo\http\header\fields\%s" não foi implementado.' , preg_replace( '/-/' , null  , $field ) );
+				printf( 'opz, cabeçalho HTTP "rpo\http\header\fields\%s" não foi implementado.' , preg_replace( '/-/' , null , $field ) );
 			}
 		}
 	}

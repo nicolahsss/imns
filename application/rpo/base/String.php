@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,9 +56,9 @@
  */
 namespace rpo\base;
 
-use \stdClass;
-use \InvalidArgumentException;
-use \UnexpectedValueException;
+use stdClass;
+use InvalidArgumentException;
+use UnexpectedValueException;
 use rpo\base\BaseObject;
 
 /**
@@ -69,7 +69,7 @@ use rpo\base\BaseObject;
  * @property	$length
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class String extends \rpo\base\Object {
+class String extends rpo\base\Object {
 	/**
 	 * Codificação padrão para novas strings
 	 * @access private
@@ -90,13 +90,13 @@ class String extends \rpo\base\Object {
 	 * @param string $string
 	 * @throws \UnexpectedValueException Se o parâmetro passado não for uma string
 	 */
-	public function __construct( $string ){
-		if ( is_string( $string ) ){
+	public function __construct( $string = '' ) {
+		if ( is_string( $string ) ) {
 			$this->storage = new stdClass();
 			$this->storage->encoding = mb_detect_encoding( $string );
 			$this->storage->data = $string;
 
-			if ( !is_null( self::$encoding ) ){
+			if (  !is_null( self::$encoding ) ) {
 				$this->convertEncoding( self::$encoding );
 			}
 		} else {
@@ -108,7 +108,7 @@ class String extends \rpo\base\Object {
 	 * Recupera a string
 	 * @return string
 	 */
-	public function __toString(){
+	public function __toString() {
 		return $this->storage->data;
 	}
 
@@ -117,9 +117,9 @@ class String extends \rpo\base\Object {
 	 * @param string $name
 	 * @return mixed
 	 */
-	public function __get( $name ){
-		switch ( $name ){
-			case 'length':
+	public function __get( $name ) {
+		switch ( $name ) {
+			case 'length' :
 				return mb_strlen( $this->storage->data , $this->getEncoding() );
 		}
 	}
@@ -130,10 +130,10 @@ class String extends \rpo\base\Object {
 	 * @return string
 	 * @throws \InvalidArgumentException Se o argumento não for um inteiro
 	 */
-	public function charAt( $offset ){
+	public function charAt( $offset ) {
 		$ret = null;
 
-		if ( is_int( $offset ) ){
+		if ( is_int( $offset ) ) {
 			$ret = mb_substr( $this->storage->data , $offset , 1 , $this->getEncoding() );
 		} else {
 			throw new InvalidArgumentException( sprintf( '%s espera um inteiro, %s foi dado.' , __METHOD__ , gettype( $offset ) ) );
@@ -148,7 +148,7 @@ class String extends \rpo\base\Object {
 	 * @param integer $offset
 	 * @return array
 	 */
-	public function charCodeAt( $offset ){
+	public function charCodeAt( $offset ) {
 		$ret = unpack( 'C*' , $this->charAt( $offset ) );
 		$ret = array_combine( range( 0 , sizeof( $ret ) - 1 ) , $ret );
 
@@ -160,7 +160,7 @@ class String extends \rpo\base\Object {
 	 * @param String $string
 	 * @return integer Retorna < 0 se a string atual for menor que a comparada, 0 se as duas forem iguais e > 0 se a comparada for maior
 	 */
-	public function compareTo( String $string ){
+	public function compareTo( String $string ) {
 		return strcmp( $this->storage->data , $string->__toString() );
 	}
 
@@ -169,7 +169,7 @@ class String extends \rpo\base\Object {
 	 * @param String $string
 	 * @return integer Retorna < 0 se a string atual for menor que a comparada, 0 se as duas forem iguais e > 0 se a comparada for maior
 	 */
-	public function compareToCaseIgnore( String $string ){
+	public function compareToCaseIgnore( String $string ) {
 		return strcmp( $this->toLowerCase() , $string->toLowerCase() );
 	}
 
@@ -178,7 +178,7 @@ class String extends \rpo\base\Object {
 	 * @param String $string
 	 * @return String
 	 */
-	public function concat( String $string ){
+	public function concat( String $string ) {
 		$string->convertEncoding( $this->getEncoding() );
 		$this->storage->data .= $string;
 		$ret = new String( $this->storage->data );
@@ -191,8 +191,8 @@ class String extends \rpo\base\Object {
 	 * @param string $encoding
 	 * @throws \InvalidArgumentException Se a codificação for inválida
 	 */
-	public function convertEncoding( $encoding ){
-		if ( self::testEncoding( $encoding ) ){
+	public function convertEncoding( $encoding ) {
+		if ( self::testEncoding( $encoding ) ) {
 			$this->storage->data = mb_convert_encoding( $this->storage->data , $encoding , $this->storage->encoding );
 			$this->storage->encoding = $encoding;
 		} else {
@@ -205,7 +205,7 @@ class String extends \rpo\base\Object {
 	 * @param BaseObject $o
 	 * @return boolean
 	 */
-	public function equals( BaseObject $o ){
+	public function equals( BaseObject $o ) {
 		return $this->compareTo( new String( $o->__toString() ) ) == 0;
 	}
 
@@ -214,7 +214,7 @@ class String extends \rpo\base\Object {
 	 * @param String $string
 	 * @return boolean
 	 */
-	public function endsWith( String $string ){
+	public function endsWith( String $string ) {
 		return $this->substring( $this->length - $string->length )->equals( $string );
 	}
 
@@ -223,7 +223,7 @@ class String extends \rpo\base\Object {
 	 * @param String $format
 	 * @param Object $args
 	 */
-	public function format( String $format , Object $args ){
+	public function format( String $format , Object $args ) {
 		$args = func_get_args();
 		$args = array_slice( $args , 1 , sizeof( $args ) - 1 );
 
@@ -234,7 +234,7 @@ class String extends \rpo\base\Object {
 	 * Codificação da string
 	 * @return string
 	 */
-	public function getEncoding(){
+	public function getEncoding() {
 		return $this->storage->encoding;
 	}
 
@@ -245,14 +245,14 @@ class String extends \rpo\base\Object {
 	 * @param boolean $ignoreCase
 	 * @return integer Retorna -1 Se o caracter não existir na string
 	 */
-	public function indexOf( $needle , $fromIndex = 0 , $ignoreCase = false ){
-		if ( $ignoreCase ){
+	public function indexOf( $needle , $fromIndex = 0 , $ignoreCase = false ) {
+		if ( $ignoreCase ) {
 			$ret = mb_stripos( $this->storage->data , $needle , $fromIndex , $this->getEncoding() );
 		} else {
 			$ret = mb_strpos( $this->storage->data , $needle , $fromIndex , $this->getEncoding() );
 		}
 
-		return is_bool( $ret ) ? -1 : $ret;
+		return is_bool( $ret ) ?  -1 : $ret;
 	}
 
 	/**
@@ -260,7 +260,7 @@ class String extends \rpo\base\Object {
 	 * @return boolean
 	 * @see String::$length
 	 */
-	public function isEmpty(){
+	public function isEmpty() {
 		return $this->length == 0;
 	}
 
@@ -271,14 +271,14 @@ class String extends \rpo\base\Object {
 	 * @param boolean $ignoreCase
 	 * @return integer Retorna -1 Se o caracter não existir na string
 	 */
-	public function lastIndexOf( $needle , $fromIndex = 0 , $ignoreCase = false ){
-		if ( $ignoreCase ){
+	public function lastIndexOf( $needle , $fromIndex = 0 , $ignoreCase = false ) {
+		if ( $ignoreCase ) {
 			$ret = mb_strripos( $this->storage->data , $needle , $fromIndex , $this->getEncoding() );
 		} else {
 			$ret = mb_strrpos( $this->storage->data , $needle , $fromIndex , $this->getEncoding() );
 		}
 
-		return is_bool( $ret ) ? -1 : $ret;
+		return is_bool( $ret ) ?  -1 : $ret;
 	}
 
 	/**
@@ -287,10 +287,10 @@ class String extends \rpo\base\Object {
 	 * @param string $replacement
 	 * @return String
 	 */
-	public function replace( $pattern , $replacement ){
+	public function replace( $pattern , $replacement ) {
 		$ret = mb_ereg_replace( $pattern , $replacement , $this->storage->data );
 
-		if ( !is_bool( $ret ) ){
+		if (  !is_bool( $ret ) ) {
 			$this->storage->data = $ret;
 		}
 
@@ -302,7 +302,7 @@ class String extends \rpo\base\Object {
 	 * @param String $string
 	 * @return boolean
 	 */
-	public function startsWith( String $string , $fromIndex = 0 ){
+	public function startsWith( String $string , $fromIndex = 0 ) {
 		return $this->substring( $fromIndex , $string->length + $fromIndex )->equals( $string );
 	}
 
@@ -312,8 +312,9 @@ class String extends \rpo\base\Object {
 	 * @param integer $lastIndex
 	 * @return String
 	 */
-	public function substring( $startIndex , $lastIndex = null ){
-		if ( is_null( $lastIndex ) ) $lastIndex = $this->length;
+	public function substring( $startIndex , $lastIndex = null ) {
+		if ( is_null( $lastIndex ) )
+			$lastIndex = $this->length;
 
 		$ret = mb_substr( $this->storage->data , $startIndex , $lastIndex - $startIndex , $this->getEncoding() );
 
@@ -326,10 +327,10 @@ class String extends \rpo\base\Object {
 	 * @param integer $limit
 	 * @return array
 	 */
-	public function split( $pattern , $limit = PHP_INT_MAX ){
+	public function split( $pattern , $limit = PHP_INT_MAX ) {
 		$ret = array();
 
-		foreach ( mb_split( $pattern , $this->storage->data , $limit ) as $string ){
+		foreach ( mb_split( $pattern , $this->storage->data , $limit ) as $string ) {
 			$ret[] = new String( $string );
 		}
 
@@ -340,7 +341,7 @@ class String extends \rpo\base\Object {
 	 * Retorna uma matriz com os char codes de todos os caracteres da string
 	 * @return array
 	 */
-	public function toCharArray(){
+	public function toCharArray() {
 		$ret = unpack( 'C*' , $this->storage->data );
 
 		return array_combine( range( 0 , sizeof( $ret ) - 1 ) , $ret );
@@ -350,7 +351,7 @@ class String extends \rpo\base\Object {
 	 * Converte a string para caixa baixa
 	 * @return String
 	 */
-	public function toLowerCase(){
+	public function toLowerCase() {
 		return new String( mb_strtolower( $this->storage->data , $this->getEncoding() ) );
 	}
 
@@ -358,7 +359,7 @@ class String extends \rpo\base\Object {
 	 * Converte a string para caixa alta
 	 * @return String
 	 */
-	public function toUpperCase(){
+	public function toUpperCase() {
 		return new String( mb_strtoupper( $this->storage->data , $this->getEncoding() ) );
 	}
 
@@ -366,10 +367,11 @@ class String extends \rpo\base\Object {
 	 * Remove os espaços iniciais da string
 	 * @return String
 	 */
-	public function ltrim(){
-		$i = -1;
+	public function ltrim() {
+		$i =  -1;
 
-		while ( $this->storage->data{ ++$i } == ' ' );
+		while ( $this->storage->data{  ++$i } == ' ' )
+			;
 
 		return $this->substring( $i );
 	}
@@ -378,10 +380,11 @@ class String extends \rpo\base\Object {
 	 * Remove os espaços finais da string
 	 * @return String
 	 */
-	public function rtrim(){
+	public function rtrim() {
 		$i = $this->length;
 
-		while ( $this->storage->data{ --$i } == ' ' );
+		while ( $this->storage->data{  --$i } == ' ' )
+			;
 
 		return $this->substring( 0 , $i + 1 );
 	}
@@ -390,7 +393,7 @@ class String extends \rpo\base\Object {
 	 * Remove os espaços iniciais e finais da string
 	 * @return String
 	 */
-	public function trim(){
+	public function trim() {
 		return $this->ltrim()->rtrim();
 	}
 
@@ -398,7 +401,7 @@ class String extends \rpo\base\Object {
 	 * Codifica caracteres da string em entidades HTML numéricas
 	 * @param array $map
 	 */
-	public function toNumericEntity( array $map = array( 0x80 , 0xff , 0 , 0xff ) ){
+	public function toNumericEntity( array $map = array( 0x80 , 0xff , 0 , 0xff ) ) {
 		return new String( mb_encode_numericentity( $this->storage->data , $map , $this->storage->encoding ) );
 	}
 
@@ -407,8 +410,8 @@ class String extends \rpo\base\Object {
 	 * @param $encoding
 	 * @throws \InvalidArgumentException Se a codificação passada não for válida
 	 */
-	public static function setDefaultEncoding( $encoding ){
-		if ( self::testEncoding( $encoding ) ){
+	public static function setDefaultEncoding( $encoding ) {
+		if ( self::testEncoding( $encoding ) ) {
 			self::$encoding = $encoding;
 		} else {
 			throw new InvalidArgumentException( 'Codificação inválida.' );
@@ -420,7 +423,7 @@ class String extends \rpo\base\Object {
 	 * @param string $encoding
 	 * @return boolean
 	 */
-	private static function testEncoding( &$encoding ){
+	private static function testEncoding( &$encoding ) {
 		$list = mb_list_encodings();
 
 		return in_array( $encoding , $list );

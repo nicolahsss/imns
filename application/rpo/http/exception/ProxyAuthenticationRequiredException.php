@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\http\exception;
 
-use \Exception;
+use Exception;
 
 /**
  * This code is similar to 401 (Unauthorized), but indicates that the client must first authenticate
@@ -76,13 +76,13 @@ use \Exception;
  * @link		http://www.w3.org/Protocols/rfc2616/rfc2616-sec17.html#bib43
  * @see			UnauthorizedException
  */
-final class ProxyAuthenticationRequiredException extends \rpo\http\exception\AbstractClientException {
+final class ProxyAuthenticationRequiredException extends rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção
 	 * @param \Exception $parent
 	 */
-	public function __construct( $message , Exception $previous = null ){
+	public function __construct( $message , Exception $previous = null ) {
 		parent::__construct( $message , 407 , $previous );
 	}
 }
