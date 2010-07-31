@@ -64,7 +64,7 @@ namespace rpo\http\header\fields;
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class CacheControl extends rpo\http\header\AbstractHTTPHeaderField {
+final class CacheControl extends \rpo\http\header\AbstractHTTPHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP Cache-Control
 	 * @param string $value Valor do campo de cabeçalho

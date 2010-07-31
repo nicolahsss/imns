@@ -57,7 +57,7 @@
 namespace rpo\http;
 
 use rpo\gui\Root;
-use stdClass;
+use \stdClass;
 
 /**
  * Implementação do corpo de uma requisição ou resposta HTTP
@@ -65,7 +65,7 @@ use stdClass;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class HTTPBody extends rpo\base\Object {
+class HTTPBody extends \rpo\base\Object {
 	/**
 	 * Objeto da composição da interface de usuário
 	 * @var \rpo\gui\Root

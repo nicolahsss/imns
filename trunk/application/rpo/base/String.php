@@ -56,9 +56,9 @@
  */
 namespace rpo\base;
 
-use stdClass;
-use InvalidArgumentException;
-use UnexpectedValueException;
+use \stdClass;
+use \InvalidArgumentException;
+use \UnexpectedValueException;
 use rpo\base\BaseObject;
 
 /**
@@ -69,7 +69,7 @@ use rpo\base\BaseObject;
  * @property	$length
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class String extends rpo\base\Object {
+class String extends \rpo\base\Object {
 	/**
 	 * Codificação padrão para novas strings
 	 * @access private

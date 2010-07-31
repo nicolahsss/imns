@@ -62,5 +62,5 @@ namespace rpo\util;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface Set extends rpo\util\Collection {
+interface Set extends \rpo\util\Collection {
 }

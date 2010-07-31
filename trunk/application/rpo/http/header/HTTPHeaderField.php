@@ -62,7 +62,7 @@ namespace rpo\http\header;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface HTTPHeaderField extends rpo\base\BaseObject {
+interface HTTPHeaderField extends \rpo\base\BaseObject {
 	/**
 	 * Recupera a representação em string do objeto
 	 * @return string

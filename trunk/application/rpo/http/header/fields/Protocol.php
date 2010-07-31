@@ -63,7 +63,7 @@ namespace rpo\http\header\fields;
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class Protocol extends rpo\http\header\AbstractHTTPPriorityHeaderField {
+final class Protocol extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * HTTP Versão 1.1
 	 */

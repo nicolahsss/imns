@@ -56,7 +56,7 @@
  */
 namespace rpo\http\header;
 
-use UnexpectedValueException;
+use \UnexpectedValueException;
 
 /**
  * Base para a implementação de um campo de cabeçalho
@@ -65,7 +65,7 @@ use UnexpectedValueException;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractHTTPHeaderField extends rpo\base\Object implements rpo\http\header\HTTPHeaderField {
+abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\http\header\HTTPHeaderField {
 	/**
 	 * Nome do campo de cabeçalho
 	 * @access	private

@@ -70,10 +70,10 @@ use rpo\http\header\fields\Protocol;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class Application extends rpo\mvc\ControllerChain {
+final class Application extends \rpo\mvc\ControllerChain {
 	/**
 	 * Objeto de resposta
-	 * @var rpo\http\HTTPResponse
+	 * @var \rpo\http\HTTPResponse
 	 */
 	private $response;
 
@@ -88,7 +88,7 @@ final class Application extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Cria a exibição padrão de erro
-	 * @param HTTPException $e
+	 * @param \rpo\http\exception\HTTPException $e
 	 * @FIXME Nesse momento estamos fazendo a saída (echo $e->getMessage()) diretamente daqui
 	 * Isso deve ser corrigido com a criação de uma ErrorView, reponsável pela exibição de
 	 * mensagens de erro da aplicação
@@ -102,7 +102,7 @@ final class Application extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Recupera o objeto de resposta
-	 * @return rpo\http\HTTPResponse
+	 * @return \rpo\http\HTTPResponse
 	 */
 	public function getResponse() {
 		return $this->response;
@@ -110,7 +110,7 @@ final class Application extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Repassa a requisição do usuário à todos os controladores anexados
-	 * @param rpo\http\HTTPRequest $request
+	 * @param \rpo\http\HTTPRequest $request
 	 */
 	public function handle( HTTPRequest $request ) {
 		$iterator = $this->getIterator();

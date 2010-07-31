@@ -69,7 +69,7 @@ use Exception;
  * @see			BadRequestException
  * @see			InternalServerErrorException
  */
-final class GatewayTimeoutException extends rpo\http\exception\AbstractServerException {
+final class GatewayTimeoutException extends \rpo\http\exception\AbstractServerException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

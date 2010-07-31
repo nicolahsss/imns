@@ -64,7 +64,7 @@ use rpo\http\HTTPRequest;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface Controller extends rpo\base\BaseObject {
+interface Controller extends \rpo\base\BaseObject {
 	/**
 	 * Verifica se o controlador sabe manipular a requisição
 	 * @param \rpo\http\HTTPRequest $request

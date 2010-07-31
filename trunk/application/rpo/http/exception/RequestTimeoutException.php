@@ -68,7 +68,7 @@ use Exception;
  * @subpackage	http\exception
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class RequestTimeoutException extends rpo\http\exception\AbstractClientException {
+final class RequestTimeoutException extends \rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

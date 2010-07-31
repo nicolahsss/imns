@@ -62,7 +62,7 @@ namespace rpo\http\header;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface HTTPPriorityHeaderField extends rpo\http\header\HTTPHeaderField, Iterator {
+interface HTTPPriorityHeaderField extends \rpo\http\header\HTTPHeaderField, \Iterator {
 	/**
 	 * Recupera a prioridade do campo
 	 * @return fload

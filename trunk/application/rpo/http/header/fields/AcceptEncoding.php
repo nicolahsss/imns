@@ -65,7 +65,7 @@ namespace rpo\http\header\fields;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			Accept
  */
-class AcceptEncoding extends rpo\http\header\AbstractHTTPPriorityHeaderField {
+class AcceptEncoding extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP Accept-Encoding
 	 * @param string $value Valor do campo de cabeçalho

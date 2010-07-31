@@ -56,8 +56,8 @@
  */
 namespace rpo\http;
 
-use ReflectionFunction;
-use ReflectionException;
+use \ReflectionFunction;
+use \ReflectionException;
 use rpo\http\HTTPHeaderSet;
 use rpo\http\HTTPBody;
 
@@ -68,7 +68,7 @@ use rpo\http\HTTPBody;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class HTTPRequest extends rpo\base\Object implements rpo\http\HTTPIO {
+final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	/**
 	 * Instância única da requisição do usuário
 	 * @access	private

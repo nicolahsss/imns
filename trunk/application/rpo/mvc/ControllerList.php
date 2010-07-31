@@ -64,12 +64,13 @@ use rpo\base\BaseObject;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class ControllerList extends rpo\util\AbstractList {
+class ControllerList extends \rpo\util\AbstractList {
 	/**
 	 * Verifica se um determinado objeto pode ser aceito pela ControllerList
 	 * @access protected
 	 * @param \rpo\base\BaseObject $object
 	 * @return boolean
+	 * @throws \InvalidArgumentException Se o parâmetro não for aceito
 	 */
 	protected function accept( BaseObject $object ) {
 		if (  !$object->getClass()->isSubclassOf( 'rpo\mvc\Controller' ) ) {
