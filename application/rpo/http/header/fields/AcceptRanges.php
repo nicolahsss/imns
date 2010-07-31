@@ -65,7 +65,7 @@ namespace rpo\http\header\fields;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			Accept
  */
-final class AcceptRanges extends rpo\http\header\AbstractHTTPPriorityHeaderField {
+final class AcceptRanges extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP Accept-Ranges
 	 * @param string $value Valor do campo de cabeçalho

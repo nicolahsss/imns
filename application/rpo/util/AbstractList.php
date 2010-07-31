@@ -66,7 +66,7 @@ use rpo\base\BaseObject;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractList extends rpo\util\AbstractCollection implements rpo\util\Lists {
+abstract class AbstractList extends \rpo\util\AbstractCollection implements \rpo\util\Lists {
 	/**
 	 * Recupera o índice de um elemento dentro da lista
 	 * @param \rpo\base\BaseObject $object
@@ -140,5 +140,4 @@ abstract class AbstractList extends rpo\util\AbstractCollection implements rpo\u
 			}
 		}
 	}
-
 }

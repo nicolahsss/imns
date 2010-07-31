@@ -65,7 +65,7 @@ use rpo\base\BaseObject;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface Lists extends rpo\util\Collection, ArrayAccess {
+interface Lists extends \rpo\util\Collection, \ArrayAccess {
 	/**
 	 * Recupera o índice de um elemento dentro da lista
 	 * @param \rpo\base\BaseObject $object

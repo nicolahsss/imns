@@ -56,7 +56,7 @@
  */
 namespace rpo\http;
 
-use ReflectionClass;
+use \ReflectionClass;
 use rpo\base\BaseObject;
 use rpo\http\header\fields\Accept;
 
@@ -66,7 +66,7 @@ use rpo\http\header\fields\Accept;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class HTTPHeaderSet extends rpo\util\AbstractSet {
+class HTTPHeaderSet extends \rpo\util\AbstractSet {
 	/**
 	 * Constroi o Set de cabeçalhos HTTP
 	 * @param array $headers

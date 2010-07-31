@@ -56,7 +56,7 @@
  */
 namespace rpo\mvc;
 
-use RuntimeException;
+use \RuntimeException;
 use rpo\mvc\ControllerList;
 use rpo\http\HTTPResponse;
 use rpo\http\HTTPRequest;
@@ -67,7 +67,7 @@ use rpo\http\HTTPRequest;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class ControllerChain extends rpo\base\Object implements rpo\mvc\Controller, IteratorAggregate {
+abstract class ControllerChain extends \rpo\base\Object implements \rpo\mvc\Controller, \IteratorAggregate {
 	/**
 	 * Lista de controladores
 	 * @access	private
@@ -134,7 +134,7 @@ abstract class ControllerChain extends rpo\base\Object implements rpo\mvc\Contro
 
 	/**
 	 * Configura o controlador
-	 * @param rpo\mvc\ControllerChain $controller
+	 * @param \rpo\mvc\ControllerChain $controller
 	 */
 	protected function configure( ControllerChain $controller ) {
 	}

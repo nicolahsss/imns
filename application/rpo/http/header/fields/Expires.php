@@ -64,7 +64,7 @@ namespace rpo\http\header\fields;
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class Expires extends rpo\http\header\AbstractHTTPHeaderField {
+class Expires extends \rpo\http\header\AbstractHTTPHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP Expires
 	 * @param string $value Valor do campo de cabeçalho

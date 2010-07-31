@@ -56,7 +56,7 @@
  */
 namespace rpo\base;
 
-use ReflectionClass;
+use \ReflectionClass;
 use rpo\base\BaseObject;
 
 /**
@@ -67,7 +67,7 @@ use rpo\base\BaseObject;
  * @subpackage	base
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class Object extends stdClass implements rpo\base\BaseObject {
+class Object extends \stdClass implements \rpo\base\BaseObject {
 	/**
 	 * Recupera uma instância de ReflectionClass para o objeto
 	 * @return \ReflectionClass

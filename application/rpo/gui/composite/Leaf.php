@@ -65,7 +65,7 @@ use rpo\gui\composite\Component;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class Leaf extends Component {
+abstract class Leaf extends \rpo\gui\composite\Component {
 	/**
 	 * Retornamos sempre true, já que se trata de um Leaf
 	 * @final

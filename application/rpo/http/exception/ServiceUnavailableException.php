@@ -70,7 +70,7 @@ use Exception;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			InternalServerErrorException
  */
-final class ServiceUnavailableException extends rpo\http\exception\AbstractServerException {
+final class ServiceUnavailableException extends \rpo\http\exception\AbstractServerException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

@@ -63,7 +63,7 @@ namespace rpo\gui\composite;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class Composite extends rpo\gui\composite\Component {
+abstract class Composite extends \rpo\gui\composite\Component {
 	/**
 	 * Um Composite não é um Leaf, por isso, retornamos sempre false
 	 * @final

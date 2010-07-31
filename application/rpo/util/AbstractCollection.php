@@ -56,11 +56,11 @@
  */
 namespace rpo\util;
 
-use Iterator;
-use IteratorIterator;
-use ArrayObject;
-use InvalidArgumentException;
-use ReflectionClass;
+use \Iterator;
+use \IteratorIterator;
+use \ArrayObject;
+use \InvalidArgumentException;
+use \ReflectionClass;
 use rpo\base\Object;
 use rpo\base\BaseObject;
 use rpo\util\Collection;
@@ -72,7 +72,7 @@ use rpo\util\Collection;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractCollection extends rpo\base\Object implements rpo\util\Collection {
+abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\Collection {
 	/**
 	 * Lista de objetos da coleção
 	 * @access	protected
@@ -82,7 +82,7 @@ abstract class AbstractCollection extends rpo\base\Object implements rpo\util\Co
 
 	/**
 	 * @access	private
-	 * @var		ReflectionClass
+	 * @var		\ReflectionClass
 	 */
 	private $iterator;
 

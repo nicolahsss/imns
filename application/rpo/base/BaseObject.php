@@ -73,7 +73,7 @@ interface BaseObject {
 
 	/**
 	 * Verifica se um objeto é igual à outro utilizando seus hashCodes
-	 * @param BaseObject $object
+	 * @param \rpo\base\BaseObject $object
 	 * @return boolean
 	 */
 	public function equals( BaseObject $object );

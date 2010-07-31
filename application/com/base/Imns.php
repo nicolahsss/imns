@@ -54,7 +54,6 @@
  * @subpackage	base
  * @version     $Id$
  */
-
 namespace com\base;
 
 use rpo\mvc\Controller;
@@ -70,10 +69,10 @@ use rpo\http\HTTPRequestMethod;
  * @subpackage	base
  * @version     $Id$
  */
-final class Imns extends rpo\mvc\ControllerChain {
+final class Imns extends \rpo\mvc\ControllerChain {
 
 	/**
-	 * @var com\math\MathView
+	 * @var \com\math\MathView
 	 */
 	private $view;
 
@@ -93,7 +92,7 @@ final class Imns extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Configura o controlador
-	 * @param rpo\mvc\ControllerChain $controller
+	 * @param \rpo\mvc\ControllerChain $controller
 	 */
 	protected function configure( ControllerChain $controller ) {
 		//TODO: Adicionar os controladores da rede social
@@ -101,7 +100,7 @@ final class Imns extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Verifica se o controlador manipula a requisição
-	 * @param rpo\http\HTTPRequest $request
+	 * @param \rpo\http\HTTPRequest $request
 	 * @return boolean
 	 */
 	public function canHandle( HTTPRequest $request ) {
@@ -186,7 +185,7 @@ final class Imns extends rpo\mvc\ControllerChain {
 
 	/**
 	 * Manipula a requisição do usuário
-	 * @param rpo\http\HTTPRequest $request
+	 * @param \rpo\http\HTTPRequest $request
 	 */
 	public function handle( HTTPRequest $request ) {
 		foreach ( $this->getIterator() as $controller ) {
@@ -195,5 +194,4 @@ final class Imns extends rpo\mvc\ControllerChain {
 			}
 		}
 	}
-
 }

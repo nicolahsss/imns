@@ -76,7 +76,7 @@ use Exception;
  * @link		http://www.w3.org/Protocols/rfc2616/rfc2616-sec17.html#bib43
  * @see			UnauthorizedException
  */
-final class ProxyAuthenticationRequiredException extends rpo\http\exception\AbstractClientException {
+final class ProxyAuthenticationRequiredException extends \rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

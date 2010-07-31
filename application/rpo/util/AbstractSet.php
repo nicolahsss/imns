@@ -66,11 +66,12 @@ use rpo\base\BaseObject;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractSet extends rpo\util\AbstractCollection implements rpo\util\Set {
+abstract class AbstractSet extends \rpo\util\AbstractCollection implements \rpo\util\Set {
 	/**
 	 * Verifica se o objeto pode ser aceito pelo Set
 	 * @param rpo\base\BaseObject $object
 	 * @return boolean
+	 * @throws \LogicException Se o objeto já estiver contido no Set
 	 */
 	protected function accept( BaseObject $object ) {
 		if ( $this->contains( $object ) ) {

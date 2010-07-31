@@ -78,7 +78,7 @@ use Exception;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			NotFoundException
  */
-final class GoneException extends rpo\http\exception\AbstractClientException {
+final class GoneException extends \rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

@@ -62,7 +62,7 @@ namespace rpo\http;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface HTTPIO extends rpo\base\BaseObject {
+interface HTTPIO extends \rpo\base\BaseObject {
 	/**
 	 * Recupera o corpo da requisição ou resposta
 	 * @return \rpo\gui\Root

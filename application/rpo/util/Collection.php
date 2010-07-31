@@ -64,7 +64,7 @@ use rpo\base\BaseObject;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-interface Collection extends rpo\base\BaseObject, Countable, IteratorAggregate {
+interface Collection extends \rpo\base\BaseObject, \Countable, \IteratorAggregate {
 	/**
 	 * Adiciona um novo objeto à coleção
 	 * @param \rpo\base\BaseObject $object

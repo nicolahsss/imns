@@ -67,7 +67,7 @@ use rpo\gui\composite\Composite;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class HTTPResponse extends rpo\base\Object implements rpo\http\HTTPIO {
+final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	/**
 	 * Instância única do objeto HTTPResponse
 	 * @access	private

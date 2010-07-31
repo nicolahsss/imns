@@ -74,7 +74,7 @@ use Exception;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @link		http://www.w3.org/Protocols/rfc2616/rfc2616-sec17.html#bib43
  */
-final class UnauthorizedException extends rpo\http\exception\AbstractClientException {
+final class UnauthorizedException extends \rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

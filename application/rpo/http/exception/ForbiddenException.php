@@ -70,7 +70,7 @@ use Exception;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			NotFountException
  */
-final class ForbiddenException extends rpo\http\exception\AbstractClientException {
+final class ForbiddenException extends \rpo\http\exception\AbstractClientException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção

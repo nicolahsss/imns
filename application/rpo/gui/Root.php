@@ -64,11 +64,11 @@ use rpo\gui\composite\Component;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class Root extends rpo\gui\composite\Composite {
+class Root extends \rpo\gui\composite\Composite {
 	/**
 	 * O componente Root não pode ser filho de nenhum outro componente
 	 * @final
-	 * @param Component $father
+	 * @param \rpo\gui\composite\Composite $father
 	 * @throws \LogicException
 	 */
 	final public function setFather( Component $father = null ) {

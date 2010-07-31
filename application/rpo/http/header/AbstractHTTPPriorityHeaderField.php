@@ -65,7 +65,7 @@ use SplPriorityQueue;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractHTTPPriorityHeaderField extends rpo\http\header\AbstractHTTPHeaderField implements rpo\http\header\HTTPPriorityHeaderField {
+abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\AbstractHTTPHeaderField implements \rpo\http\header\HTTPPriorityHeaderField {
 	/**
 	 * Fila de cabeçalhos segundo sua prioridade
 	 * @access	private

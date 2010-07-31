@@ -63,5 +63,5 @@ namespace rpo\http\exception;
  * @subpackage	http\exception
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractClientException extends rpo\http\exception\HTTPException {
+abstract class AbstractClientException extends \rpo\http\exception\HTTPException {
 }

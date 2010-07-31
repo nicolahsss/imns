@@ -65,7 +65,7 @@ use rpo\base\BaseObject;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class ComponentList extends rpo\util\AbstractList {
+class ComponentList extends \rpo\util\AbstractList {
 	/**
 	 * Verifica se um determinado objeto pode ser aceito pela Collection
 	 * @param \rpo\base\BaseObject $objeckkkt
