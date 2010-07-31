@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,8 +56,8 @@
  */
 namespace rpo\http;
 
-use \ReflectionFunction;
-use \ReflectionException;
+use ReflectionFunction;
+use ReflectionException;
 use rpo\http\HTTPHeaderSet;
 use rpo\http\HTTPBody;
 
@@ -68,7 +68,7 @@ use rpo\http\HTTPBody;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
+final class HTTPRequest extends rpo\base\Object implements rpo\http\HTTPIO {
 	/**
 	 * Instância única da requisição do usuário
 	 * @access	private
@@ -102,7 +102,7 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Constroi o objeto de requisição
 	 * @param string $base Diretório base da requisição (eq: RewriteBase)
 	 */
-	private function __construct( $base ){
+	private function __construct( $base ) {
 		$this->uri = preg_replace( sprintf( '/^%s(.*)/' , preg_quote( $base , '/' ) ) , '$1' , $_SERVER[ 'REQUEST_URI' ] );
 	}
 
@@ -110,8 +110,8 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera o corpo da requisição ou resposta
 	 * @return \rpo\http\HTTPBody
 	 */
-	public function getBody(){
-		if ( is_null( $this->body ) ){
+	public function getBody() {
+		if ( is_null( $this->body ) ) {
 			$this->body = new HTTPBody();
 			$this->body->get = (object) $_GET;
 			$this->body->post = (object) $_POST;
@@ -124,13 +124,13 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera a lista de cabeçalhos de entrada ou saída
 	 * @return rpo\http\HTTPHeaderSet
 	 */
-	public function getHeaders(){
-		if ( is_null( $this->headers ) ){
+	public function getHeaders() {
+		if ( is_null( $this->headers ) ) {
 			try {
 				$getallheaders = new ReflectionFunction( 'getallheaders' );
 
 				$this->headers = new HTTPHeaderSet( $getallheaders->invoke() );
-			} catch ( ReflectionException $e ){
+			} catch ( ReflectionException $e ) {
 				$this->headers = new ArrayObject();
 			}
 		}
@@ -143,7 +143,7 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * @return string
 	 * @see HTTPRequestMethod::DELETE, HTTPRequestMethod::GET, HTTPRequestMethod::POST, HTTPRequestMethod::PUT
 	 */
-	public function getMethod(){
+	public function getMethod() {
 		return $_SERVER[ 'REQUEST_METHOD' ];
 	}
 
@@ -151,7 +151,7 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera o URI da requisição do usuário
 	 * @return string
 	 */
-	public function getURI(){
+	public function getURI() {
 		return $this->uri;
 	}
 
@@ -159,8 +159,8 @@ final class HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera a instância do objeto de requisição do usuário
 	 * @return rpo\http\HTTPRequest
 	 */
-	public static function getInstance( $base = '/' ){
-		if ( self::$instance == null ){
+	public static function getInstance( $base = '/' ) {
+		if ( self::$instance == null ) {
 			self::$instance = new HTTPRequest( $base );
 		}
 

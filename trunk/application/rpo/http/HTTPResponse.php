@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -67,7 +67,7 @@ use rpo\gui\composite\Composite;
  * @subpackage	http
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
+final class HTTPResponse extends rpo\base\Object implements rpo\http\HTTPIO {
 	/**
 	 * Instância única do objeto HTTPResponse
 	 * @access	private
@@ -93,7 +93,7 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	/**
 	 * Constroi o objeto de resposta
 	 */
-	private function __construct(){
+	private function __construct() {
 		$this->body = new HTTPBody();
 		$this->headers = new HTTPHeaderSet();
 	}
@@ -102,7 +102,7 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera o corpo da requisição ou resposta
 	 * @return rpo\http\HTTPBody
 	 */
-	public function getBody(){
+	public function getBody() {
 		return $this->body;
 	}
 
@@ -110,7 +110,7 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * Recupera a lista de cabeçalhos de entrada ou saída
 	 * @return rpo\http\HTTPHeaderSet
 	 */
-	public function getHeaders(){
+	public function getHeaders() {
 		return $this->headers;
 	}
 
@@ -119,8 +119,8 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	 * @return rpo\http\HTTPResponse
 	 * @static
 	 */
-	public static function getInstance(){
-		if ( self::$instance == null ){
+	public static function getInstance() {
+		if ( self::$instance == null ) {
 			self::$instance = new HTTPResponse();
 		}
 
@@ -130,8 +130,8 @@ final class HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
 	/**
 	 * Exibe a resposta
 	 */
-	public function show(){
-		foreach ( $this->headers as $header ){
+	public function show() {
+		foreach ( $this->headers as $header ) {
 			header( (string) $header , true , $header->getStatusCode() );
 		}
 

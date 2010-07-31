@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -63,7 +63,7 @@ namespace rpo\http\header\fields;
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class Protocol extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
+final class Protocol extends rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * HTTP Versão 1.1
 	 */
@@ -80,7 +80,7 @@ final class Protocol extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	 * @param string $message Mensagem de status
 	 * @param integer $status Código de status
 	 */
-	public function __construct( $protocol = '1.1' , $status = 200 , $message = null ){
+	public function __construct( $protocol = '1.1' , $status = 200 , $message = null ) {
 		parent::__construct( $message , $protocol , $status );
 	}
 
@@ -88,7 +88,7 @@ final class Protocol extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	 * Recupera a representação do campo de cabeçalho como string
 	 * @return string
 	 */
-	public function __toString(){
+	public function __toString() {
 		return sprintf( 'HTTP/%s %d %s' , $this->getValue() , $this->getStatusCode() , $this->getName() );
 	}
 
@@ -97,7 +97,7 @@ final class Protocol extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
 	 * @return boolean
 	 * @param string $value
 	 */
-	protected function accept( $value ){
+	protected function accept( $value ) {
 		return ( $value == self::HTTP_1_0 ) || ( $value == self::HTTP_1_1 );
 	}
 }

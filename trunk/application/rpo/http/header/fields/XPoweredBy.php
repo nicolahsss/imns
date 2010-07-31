@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -63,12 +63,12 @@ namespace rpo\http\header\fields;
  * @subpackage	http\header\fields
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class XPoweredBy extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
+final class XPoweredBy extends rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP X-Powered-By
 	 * @param string $value Valor do campo de cabeçalho
 	 */
-	public function __construct( $value ){
+	public function __construct( $value ) {
 		parent::__construct( 'X-Powered-By' , $value );
 	}
 
@@ -77,7 +77,7 @@ final class XPoweredBy extends \rpo\http\header\AbstractHTTPPriorityHeaderField 
 	 * @return boolean
 	 * @param string $value
 	 */
-	public function accept( $value ){
+	public function accept( $value ) {
 		return (bool) preg_match( '/^[A-Za-z0-9\/\.\-\+\=_;:~\(\)\<\>]+$/' , $value );
 	}
 }

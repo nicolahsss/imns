@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,8 +56,6 @@
  */
 namespace rpo\gui\composite;
 
-use rpo\gui\composite\Component;
-
 /**
  * Interface para definição de um Component que pode ter filhos
  * @abstract
@@ -65,13 +63,13 @@ use rpo\gui\composite\Component;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class Composite extends Component {
+abstract class Composite extends rpo\gui\composite\Component {
 	/**
 	 * Um Composite não é um Leaf, por isso, retornamos sempre false
 	 * @final
 	 * @return boolean
 	 */
-	final public function isLeaf(){
+	final public function isLeaf() {
 		return false;
 	}
 
@@ -79,9 +77,9 @@ abstract class Composite extends Component {
 	 * Desenha todos os filhos do Composite
 	 * @access protected
 	 */
-	protected function drawAll(){
-		if ( !$this->isLeaf() ){
-			foreach ( $this as $child ){
+	protected function drawAll() {
+		if (  !$this->isLeaf() ) {
+			foreach ( $this as $child ) {
 				$child->draw();
 			}
 		}

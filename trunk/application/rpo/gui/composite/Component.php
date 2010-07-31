@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\gui\composite;
 
-use \IteratorIterator;
+use IteratorIterator;
 use rpo\gui\composite\ComponentList;
 
 /**
@@ -66,7 +66,7 @@ use rpo\gui\composite\ComponentList;
  * @subpackage	gui\composite
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class Component extends \rpo\base\Object implements \IteratorAggregate {
+abstract class Component extends rpo\base\Object implements IteratorAggregate {
 	/**
 	 * Lista de filhos do componente
 	 * @access	protected
@@ -79,12 +79,12 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * @access	private
 	 * @var		\rpo\gui\composite\Component
 	 */
-	private $father;
+	protected $father;
 
 	/**
 	 * Constroi o componente
 	 */
-	public function __construct(){
+	public function __construct() {
 		$this->childs = new ComponentList();
 	}
 
@@ -92,7 +92,7 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * Verifica se o componente aceita um outro componente como filho
 	 * @param \rpo\gui\composite\Component $component
 	 */
-	protected function accept( Component $component ){
+	protected function accept( Component $component ) {
 		return true;
 	}
 
@@ -101,9 +101,9 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * @param \rpo\gui\composite\Component $component
 	 * @throws LogicException Se o componente pai for um Leaf
 	 */
-	public function appendChild( Component $component ){
-		if ( !$this->isLeaf() ){
-			if ( $this->accept( $component ) ){
+	public function appendChild( Component $component ) {
+		if (  !$this->isLeaf() ) {
+			if ( $this->accept( $component ) ) {
 				$component->setFather( $this );
 
 				$this->childs->add( $component );
@@ -118,7 +118,7 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * @param \rpo\gui\composite\Component $component
 	 * @return boolean
 	 */
-	public function contains( Component $component ){
+	public function contains( Component $component ) {
 		return $this->isLeaf() ? false : $this->childs->contains( $component );
 	}
 
@@ -131,7 +131,7 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * Recupera um Iterator para os filhos do componente
 	 * @return \Iterator
 	 */
-	public function getIterator(){
+	public function getIterator() {
 		return $this->childs->getIterator();
 	}
 
@@ -146,8 +146,8 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * @param \rpo\gui\composite\Component $child
 	 * @throws \LogicException Se o filho a ser removido não for filho desse pai
 	 */
-	public function removeChild( Component $child ){
-		if ( $this->contains( $child ) ){
+	public function removeChild( Component $child ) {
+		if ( $this->contains( $child ) ) {
 			$this->childs->remove( $child );
 			$child->setFather();
 		} else {
@@ -160,9 +160,9 @@ abstract class Component extends \rpo\base\Object implements \IteratorAggregate 
 	 * @param \rpo\gui\composite\Component $component
 	 * @throws \LogicException Se o componente já for filho de outro pai
 	 */
-	public function setFather( Component $component = null ){
-		if ( !is_null( $component ) ){
-			if ( is_null( $this->father ) ){
+	public function setFather( Component $component = null ) {
+		if (  !is_null( $component ) ) {
+			if ( is_null( $this->father ) ) {
 				$this->father = $component;
 			} else {
 				throw new LogicException( 'O componente já possui um pai.' );

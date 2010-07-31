@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- * beneficiando assim toda a comunidade.
+ *    beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -52,93 +52,37 @@
  * @license		http://creativecommons.org/licenses/GPL/2.0/deed.pt
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @package		rpo
- * @subpackage	util
+ * @subpackage	gui
  */
-namespace rpo\util;
-
-use rpo\base\BaseObject;
+namespace rpo\gui;
 
 /**
- * Implementação base de uma coleção que permite acesso à seus elementos como se fosse
- * uma matriz
+ * Interface para definição de um widget para a interface de usuário
  * @abstract
  * @package		rpo
- * @subpackage	util
+ * @subpackage	gui
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractList extends rpo\util\AbstractCollection implements rpo\util\Lists {
+abstract class Widget extends \rpo\gui\UIObject {
 	/**
-	 * Recupera o índice de um elemento dentro da lista
-	 * @param \rpo\base\BaseObject $object
-	 * @return integer Retorna -1 se o objeto não for encontrado na lista
+	 * Recupera o pai do widget
+	 * @return \rpo\gui\composite\Component
 	 */
-	public function indexOf( BaseObject $object ) {
-		foreach ( $this as $offset => $element ) {
-			if ( $object->equals( $element ) ) {
-				return $offset;
-			}
-		}
-
-		return  -1;
+	public function getParent(){
+		return $this->father;
 	}
 
 	/**
-	 * Verifica se um índice existe na lista
-	 * @param integer $offset
-	 * @return boolean
+	 * Remove o widget de seu pai
+	 * @throws \RuntimeException Se o pai for null
 	 */
-	public function offsetExists( $offset ) {
-		return $this->storage->offsetExists( $offset );
-	}
+	public function removeFromParent(){
+		$parent = $this->getParent();
 
-	/**
-	 * Recupera um objeto da lista utilizando seu índice
-	 * @param integer $offset
-	 * @return \rpo\base\BaseObject
-	 */
-	public function offsetGet( $offset ) {
-		return $this->storage->offsetGet( $offset );
-	}
-
-	/**
-	 * Define um novo objeto em uma posição específica da lista
-	 * @param integer $offset A posição onde será colocado o objeto
-	 * @param \rpo\base\BaseObject $value
-	 * @throws \UnexpectedValueException Se o valor definido não for um objeto
-	 */
-	public function offsetSet( $offset , $value ) {
-		if ( $value instanceof \rpo\base\BaseObject ) {
-			$this->storage->offsetSet( $offset , $value );
-		} else {
-			throw new \UnexpectedValueException( 'Apenas objetos são aceitos pela lista' );
+		if ( is_null( $parent ) ){
+			throw new \RuntimeException( 'NULL recebido por getParent()' );
+		} elseif ( $parent->contains( $this ) ){
+			$parent->removeChild( $this );
 		}
 	}
-
-	/**
-	 * Remove um objeto de uma posição específica da lista
-	 * @param integer $offset
-	 */
-	public function offsetUnset( $offset ) {
-		$this->storage->offsetUnset( $offset );
-	}
-
-	/**
-	 * Extrai uma fatia da lista
-	 * @param integer $offset Posição inicial de onde será extraída a fatia
-	 * @param integer $length Tamanho da fatia
-	 * @return \rpo\util\Lists
-	 */
-	public function slice( $offset , $length = null ) {
-		$total = $this->count();
-		$length = is_null( $length ) ? $this->count() - $offset : $length;
-
-		if ( is_integer( $offset ) && ( $offset < $total ) ) {
-			if ( is_integer( $length ) && ( $offset + $length < $total ) ) {
-				$items = $this->toArray();
-
-				return $this->getClass()->newInstance()->exchangeArray( array_slice( $items , $offset , $length , false ) );
-			}
-		}
-	}
-
 }

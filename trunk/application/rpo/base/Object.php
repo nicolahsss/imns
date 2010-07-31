@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\base;
 
-use \ReflectionClass;
+use ReflectionClass;
 use rpo\base\BaseObject;
 
 /**
@@ -67,12 +67,12 @@ use rpo\base\BaseObject;
  * @subpackage	base
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class Object extends \stdClass implements \rpo\base\BaseObject {
+class Object extends stdClass implements rpo\base\BaseObject {
 	/**
 	 * Recupera uma instância de ReflectionClass para o objeto
 	 * @return \ReflectionClass
 	 */
-	public function getClass(){
+	public function getClass() {
 		return new ReflectionClass( get_class( $this ) );
 	}
 
@@ -81,7 +81,7 @@ class Object extends \stdClass implements \rpo\base\BaseObject {
 	 * @param \rpo\base\BaseObject $object
 	 * @return boolean
 	 */
-	public function equals( BaseObject $object ){
+	public function equals( BaseObject $object ) {
 		return $this->hashCode() == $object->hashCode();
 	}
 
@@ -89,7 +89,7 @@ class Object extends \stdClass implements \rpo\base\BaseObject {
 	 * Recupera um hash para o objeto
 	 * @return \rpo\base\String
 	 */
-	public function hashCode(){
+	public function hashCode() {
 		return new \rpo\base\String( spl_object_hash( $this ) );
 	}
 }

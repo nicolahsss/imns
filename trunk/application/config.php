@@ -6,7 +6,7 @@ $include_path = ini_get( 'include_path' ) . PATH_SEPARATOR . realpath( '../appli
 
 ini_set( 'include_path' , implode( PATH_SEPARATOR , array_unique( explode( PATH_SEPARATOR , $include_path ) ) ) );
 
-function loader( $class ){
+function loader( $class ) {
 	require sprintf( '%s.php' , implode( DIRECTORY_SEPARATOR , explode( '\\' , $class ) ) );
 }
 

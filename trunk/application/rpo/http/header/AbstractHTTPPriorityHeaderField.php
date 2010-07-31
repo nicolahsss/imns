@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\http\header;
 
-use \SplPriorityQueue;
+use SplPriorityQueue;
 
 /**
  * Base para implementação de um campo de cabeçalho que possui prioridade
@@ -65,7 +65,7 @@ use \SplPriorityQueue;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\AbstractHTTPHeaderField implements \rpo\http\header\HTTPPriorityHeaderField {
+abstract class AbstractHTTPPriorityHeaderField extends rpo\http\header\AbstractHTTPHeaderField implements rpo\http\header\HTTPPriorityHeaderField {
 	/**
 	 * Fila de cabeçalhos segundo sua prioridade
 	 * @access	private
@@ -79,7 +79,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * @param string $value Valor do cabeçalho
 	 * @param integer $status Código de status
 	 */
-	public function __construct( $name , $value , $status = null ){
+	public function __construct( $name , $value , $status = null ) {
 		parent::__construct( $name , $value , $status );
 
 		$this->queue = new SplPriorityQueue();
@@ -91,17 +91,17 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Interpreta o valor do cabeçalho
 	 * @param string $value
 	 */
-	private function parse( $value ){
+	private function parse( $value ) {
 		$match = array();
 
-		if ( preg_match_all( '/,?(?<values>[^;]+)(;q\=(?<priority>[0-9](\.[0-9]+)?))?/' , $value , $match ) ){
+		if ( preg_match_all( '/,?(?<values>[^;]+)(;q\=(?<priority>[0-9](\.[0-9]+)?))?/' , $value , $match ) ) {
 			$items = array_combine( $match[ 'values' ] , $match[ 'priority' ] );
 
-			foreach ( $items as $value => $priority ){
+			foreach ( $items as $value => $priority ) {
 				$priority = (float) ( empty( $priority ) ? 1 : $priority );
 				$parts = explode( ',' , $value );
 
-				foreach ( $parts as $item ){
+				foreach ( $parts as $item ) {
 					$this->queue->insert( $item , $priority );
 				}
 			}
@@ -113,7 +113,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * @return string
 	 * @see rpo\http\header\AbstractHTTPPriorityHeaderField::getValue()
 	 */
-	public function current(){
+	public function current() {
 		return $this->getValue();
 	}
 
@@ -121,7 +121,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Recupera o valor atual
 	 * @return string
 	 */
-	public function getValue(){
+	public function getValue() {
 		$current = $this->queue->current();
 
 		return $current[ 'data' ];
@@ -131,7 +131,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Recupera a prioridade do valor
 	 * @return float
 	 */
-	public function getPriority(){
+	public function getPriority() {
 		$current = $this->queue->current();
 
 		return $current[ 'priority' ];
@@ -142,7 +142,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * @return integer
 	 * @see \Iterator::key()
 	 */
-	public function key(){
+	public function key() {
 		return $this->queue->key();
 	}
 
@@ -150,7 +150,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Avança para o próximo item
 	 * @see \Iterator::next()
 	 */
-	public function next(){
+	public function next() {
 		$this->queue->next();
 	}
 
@@ -158,7 +158,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Reinicia o Iterator
 	 * @see \Iterator::rewind()
 	 */
-	public function rewind(){
+	public function rewind() {
 		$this->queue->rewind();
 	}
 
@@ -166,7 +166,7 @@ abstract class AbstractHTTPPriorityHeaderField extends \rpo\http\header\Abstract
 	 * Verifica se o Iterator é válido
 	 * @see \Iterator::rewind()
 	 */
-	public function valid(){
+	public function valid() {
 		return $this->queue->valid();
 	}
 }

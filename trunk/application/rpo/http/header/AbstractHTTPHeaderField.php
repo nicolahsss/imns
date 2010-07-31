@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\http\header;
 
-use \UnexpectedValueException;
+use UnexpectedValueException;
 
 /**
  * Base para a implementação de um campo de cabeçalho
@@ -65,7 +65,7 @@ use \UnexpectedValueException;
  * @subpackage	http\header
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\http\header\HTTPHeaderField {
+abstract class AbstractHTTPHeaderField extends rpo\base\Object implements rpo\http\header\HTTPHeaderField {
 	/**
 	 * Nome do campo de cabeçalho
 	 * @access	private
@@ -93,7 +93,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @param string $value Valor do campo de cabeçalho
 	 * @param integer $status Código de status do cabeçalho
 	 */
-	public function __construct( $name , $value , $status = null ){
+	public function __construct( $name , $value , $status = null ) {
 		$this->name = $name;
 		$this->status = $status;
 		$this->setValue( $value );
@@ -103,7 +103,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * Recupera a representação do campo de cabeçalho como string
 	 * @return string
 	 */
-	public function __toString(){
+	public function __toString() {
 		return sprintf( '%s: %s' , $this->name , $this->value );
 	}
 
@@ -112,7 +112,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @param string $value
 	 * @return boolean
 	 */
-	protected function accept( $value ){
+	protected function accept( $value ) {
 		return true;
 	}
 
@@ -120,7 +120,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * Recupera o nome do cabeçalho
 	 * @return string
 	 */
-	public function getName(){
+	public function getName() {
 		return $this->name;
 	}
 
@@ -128,7 +128,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * Recupera o valor do campo de cabeçalho
 	 * @return string
 	 */
-	public function getValue(){
+	public function getValue() {
 		return $this->value;
 	}
 
@@ -136,7 +136,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * Recupera o código de status do cabeçalho
 	 * @return integer
 	 */
-	public function getStatusCode(){
+	public function getStatusCode() {
 		return $this->status;
 	}
 
@@ -145,7 +145,7 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @return \rpo\base\String
 	 * @see Object::hashCode()
 	 */
-	public function hashCode(){
+	public function hashCode() {
 		return new \rpo\base\String( md5( get_class( $this ) ) );
 	}
 
@@ -154,8 +154,8 @@ abstract class AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\
 	 * @param string $value
 	 * @throws \UnexpectedValueException Se o valor não for aceito pelo cabeçalho
 	 */
-	public function setValue( $value ){
-		if ( $this->accept( $value ) ){
+	public function setValue( $value ) {
+		if ( $this->accept( $value ) ) {
 			$this->value = $value;
 		} else {
 			throw new UnexpectedValueException( sprintf( 'Valor não aceito por %s' , $this->getClass()->getName() ) );

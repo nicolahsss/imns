@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -66,14 +66,14 @@ use rpo\base\BaseObject;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractSet extends \rpo\util\AbstractCollection implements \rpo\util\Set {
+abstract class AbstractSet extends rpo\util\AbstractCollection implements rpo\util\Set {
 	/**
 	 * Verifica se o objeto pode ser aceito pelo Set
 	 * @param rpo\base\BaseObject $object
 	 * @return boolean
 	 */
-	protected function accept( BaseObject $object ){
-		if ( $this->contains( $object ) ){
+	protected function accept( BaseObject $object ) {
+		if ( $this->contains( $object ) ) {
 			throw new LogicException( 'O Set já contém o objeto especificado.' );
 		}
 

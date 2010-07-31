@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,11 +56,11 @@
  */
 namespace rpo\util;
 
-use \Iterator;
-use \IteratorIterator;
-use \ArrayObject;
-use \InvalidArgumentException;
-use \ReflectionClass;
+use Iterator;
+use IteratorIterator;
+use ArrayObject;
+use InvalidArgumentException;
+use ReflectionClass;
 use rpo\base\Object;
 use rpo\base\BaseObject;
 use rpo\util\Collection;
@@ -72,7 +72,7 @@ use rpo\util\Collection;
  * @subpackage	util
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\Collection {
+abstract class AbstractCollection extends rpo\base\Object implements rpo\util\Collection {
 	/**
 	 * Lista de objetos da coleção
 	 * @access	protected
@@ -139,8 +139,8 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	 * @return boolean
 	 */
 	public function contains( BaseObject $object ) {
-		foreach ( $this as $element ){
-			if ( $object->equals( $element ) ){
+		foreach ( $this as $element ) {
+			if ( $object->equals( $element ) ) {
 				return true;
 			}
 		}
@@ -168,7 +168,7 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	 * @return integer
 	 * @see \Countable::count()
 	 */
-	public function count(){
+	public function count() {
 		return $this->storage->count();
 	}
 
@@ -177,11 +177,11 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	 * @param array $items Lista de itens
 	 * @return \rpo\util\AbstractCollection Retorna a própria instância do objeto
 	 */
-	public function exchangeArray( array $items ){
+	public function exchangeArray( array $items ) {
 		$this->removeAll();
 
-		foreach ( $items as $item ){
-			if ( $item instanceof \rpo\base\BaseObject ){
+		foreach ( $items as $item ) {
+			if ( $item instanceof \rpo\base\BaseObject ) {
 				$this->add( $item );
 			} else {
 				throw new UnexpectedValueException( 'Todos os itens da matriz devem ser instâncias de BaseObject' );
@@ -224,8 +224,8 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	 * @param \rpo\base\BaseObject $object
 	 */
 	public function remove( BaseObject $object ) {
-		foreach ( $this as $offset => $element ){
-			if ( $object->equals( $element ) ){
+		foreach ( $this as $offset => $element ) {
+			if ( $object->equals( $element ) ) {
 				$this->storage->offsetUnset( $offset );
 			}
 		}
@@ -236,9 +236,9 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	 * @param \rpo\util\Collection $collection
 	 */
 	public function removeAll( Collection $collection ) {
-		foreach ( $collection as $object ){
-			foreach ( $this as $offset => $element ){
-				if ( $object->equals( $element ) ){
+		foreach ( $collection as $object ) {
+			foreach ( $this as $offset => $element ) {
+				if ( $object->equals( $element ) ) {
 					$this->storage->offsetUnset( $offset );
 				}
 			}
@@ -282,7 +282,7 @@ abstract class AbstractCollection extends \rpo\base\Object implements \rpo\util\
 	/**
 	 * Atualiza os índices da coleção depois de várias operações add() e remove()
 	 */
-	public function update(){
+	public function update() {
 		$this->storage->exchangeArray( array_values( $this->storage->getArrayCopy() ) );
 	}
 }

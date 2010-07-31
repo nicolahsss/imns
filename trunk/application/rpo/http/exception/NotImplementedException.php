@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -56,7 +56,7 @@
  */
 namespace rpo\http\exception;
 
-use \Exception;
+use Exception;
 
 /**
  * The server does not support the functionality required to fulfill the request.
@@ -68,13 +68,13 @@ use \Exception;
  * @subpackage	http\exception
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-final class InternalServerErrorException extends \rpo\http\exception\AbstractServerException {
+final class InternalServerErrorException extends rpo\http\exception\AbstractServerException {
 	/**
 	 * Constroi o objeto da exceção
 	 * @param string $message A exceção
 	 * @param \Exception $parent
 	 */
-	public function __construct( $message , Exception $previous = null ){
+	public function __construct( $message , Exception $previous = null ) {
 		parent::__construct( $message , 501 , $previous );
 	}
 }

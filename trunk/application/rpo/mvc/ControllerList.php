@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -64,15 +64,15 @@ use rpo\base\BaseObject;
  * @subpackage	mvc
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  */
-class ControllerList extends \rpo\util\AbstractList {
+class ControllerList extends rpo\util\AbstractList {
 	/**
 	 * Verifica se um determinado objeto pode ser aceito pela ControllerList
 	 * @access protected
 	 * @param \rpo\base\BaseObject $object
 	 * @return boolean
 	 */
-	protected function accept( BaseObject $object ){
-		if ( !$object->getClass()->isSubclassOf( 'rpo\mvc\Controller' ) ){
+	protected function accept( BaseObject $object ) {
+		if (  !$object->getClass()->isSubclassOf( 'rpo\mvc\Controller' ) ) {
 			throw new InvalidArgumentException( 'Apenas Controller são aceitos por ControllerList' );
 		}
 

@@ -10,7 +10,7 @@
  * 2. O direito de estudar como o programa funciona e adptá-lo para suas necessidades.
  * 3. O direito de redistribuir cópias, permitindo assim que você ajude outras pessoas.
  * 4. O direito de aperfeiçoar o programa, e distribuir seus aperfeiçoamentos para o público,
- *    beneficiando assim toda a comunidade.
+ * beneficiando assim toda a comunidade.
  *
  * Você terá os direitos acima especificados contanto que Você cumpra com os requisitos expressos
  * nesta Licença.
@@ -65,12 +65,12 @@ namespace rpo\http\header\fields;
  * @license		http://creativecommons.org/licenses/GPL/2.0/legalcode.pt
  * @see			Accept
  */
-final class AcceptLanguage extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
+final class AcceptLanguage extends rpo\http\header\AbstractHTTPPriorityHeaderField {
 	/**
 	 * Constroi o objeto que representa o cabeçalho HTTP Accept-Language
 	 * @param string $value Valor do campo de cabeçalho
 	 */
-	public function __construct( $value ){
+	public function __construct( $value ) {
 		parent::__construct( 'Accept-Language' , $value );
 	}
 
@@ -79,7 +79,7 @@ final class AcceptLanguage extends \rpo\http\header\AbstractHTTPPriorityHeaderFi
 	 * @return boolean
 	 * @param string $value
 	 */
-	public function accept( $value ){
+	public function accept( $value ) {
 		return (bool) preg_match( '/[a-zA-Z-]+/' , $value );
 	}
 }
