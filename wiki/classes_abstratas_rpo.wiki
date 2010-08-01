@@ -1,0 +1,158 @@
+#summary Classes abstratas implementadas pelo projeto rpo
+
+=Resumo das classes abstratas=
+
+As seguintes classes abstratas são definidas no diretório rpo/
+
+{{{
+abstract class rpo\util\AbstractSet extends \rpo\util\AbstractCollection implements \rpo\util\Set {    
+    protected function accept( BaseObject $object ) { /*...*/ }
+}
+
+abstract class rpo\util\AbstractList extends \rpo\util\AbstractCollection implements \rpo\util\Lists {    
+    public function indexOf( BaseObject $object ) { /*...*/ }    
+    public function offsetExists( $offset ) { /*...*/ }    
+    public function offsetGet( $offset ) { /*...*/ }    
+    public function offsetSet( $offset , $value ) { /*...*/ }    
+    public function offsetUnset( $offset ) { /*...*/ }    
+    public function slice( $offset , $length = null ) { /*...*/ }
+}
+
+abstract class rpo\util\AbstractCollection extends \rpo\base\Object implements \rpo\util\Collection {    
+    protected $storage;    
+    private $iterator;    
+    public function __construct() { /*...*/ }    
+    abstract protected function accept( BaseObject $object );    
+    public function add( BaseObject $object ) { /*...*/ }    
+    public function addAll( Collection $collection ) { /*...*/ }    
+    public function clear() { /*...*/ }    
+    public function contains( BaseObject $object ) { /*...*/ }    
+    public function containsAll( Collection $collection ) { /*...*/ }    
+    public function count() { /*...*/ }    
+    public function exchangeArray( array $items ) { /*...*/ }    
+    public function getIterator() { /*...*/ }    
+    public function getIteratorClass() { /*...*/ }    
+    public function isEmpty() { /*...*/ }    
+    public function remove( BaseObject $object ) { /*...*/ }    
+    public function removeAll( Collection $collection ) { /*...*/ }    
+    public function retainAll( Collection $collection ) { /*...*/ }    
+    public function setIteratorClass( $class ) { /*...*/ }    
+    public function toArray() { /*...*/ }    
+    public function update() { /*...*/ }
+}
+
+abstract class rpo\mvc\ControllerChain extends \rpo\base\Object implements \rpo\mvc\Controller, \IteratorAggregate {    
+    private $controllers;    
+    private $iterator;    
+    private $previous;    
+    public function __construct() { /*...*/ }    
+    public function attach( ControllerChain $controller ) { /*...*/ }    
+    public function canHandle( HTTPRequest $request ) { /*...*/ }    
+    protected function configure( ControllerChain $controller ) {
+    }
+    
+    public function detach( ControllerChain $controller ) { /*...*/ }    
+    public function getIterator() { /*...*/ }    
+    public function getResponse() { /*...*/ }    
+    public function setPrevious( ControllerChain $controller ) { /*...*/ }
+}
+
+abstract rpo\http\header\class AbstractHTTPPriorityHeaderField extends \rpo\http\header\AbstractHTTPHeaderField implements \rpo\http\header\HTTPPriorityHeaderField {    
+    private $queue;    
+    public function __construct( $name , $value , $status = null ) { /*...*/ }    
+    private function parse( $value ) { /*...*/ }    
+    public function current() { /*...*/ }    
+    public function getValue() { /*...*/ }    
+    public function getPriority() { /*...*/ }    
+    public function key() { /*...*/ }    
+    public function next() { /*...*/ }    
+    public function rewind() { /*...*/ }    
+    public function valid() { /*...*/ }
+}
+
+abstract class rpo\http\header\AbstractHTTPHeaderField extends \rpo\base\Object implements \rpo\http\header\HTTPHeaderField {    
+    private $name;    
+    private $value;    
+    private $status;    
+    public function __construct( $name , $value , $status = null ) { /*...*/ }    
+    public function __toString() { /*...*/ }    
+    protected function accept( $value ) { /*...*/ }    
+    public function getName() { /*...*/ }    
+    public function getValue() { /*...*/ }    
+    public function getStatusCode() { /*...*/ }    
+    public function hashCode() { /*...*/ }    
+    public function setValue( $value ) { /*...*/ }
+}
+
+abstract class rpo\http\exception\HTTPException extends \Exception {
+}
+
+abstract class rpo\http\exception\AbstractServerException extends \rpo\http\exception\HTTPException {
+}
+
+abstract class rpo\http\exception\AbstractClientException extends \rpo\http\exception\HTTPException {
+}
+
+abstract class rpo\gui\UIObject extends \rpo\gui\composite\Component {    
+    private $height;    
+    private $id;    
+    private $name;    
+    private $primaryStyle;    
+    private $readOnly = false;    
+    private $style;    
+    private $title;    
+    private $visible = true;    
+    private $width;    
+    public function __construct(){ /*...*/ }    
+    public function addStyleName( String $style ){ /*...*/ }    
+    public function getHeight(){ /*...*/ }    
+    public function getId(){ /*...*/ }    
+    public function getName(){ /*...*/ }    
+    public function getPrimaryStyle(){ /*...*/ }    
+    public function getStyleName(){ /*...*/ }    
+    public function getTitle(){ /*...*/ }    
+    public function getWidth(){ /*...*/ }    
+    public function isReadOnly(){ /*...*/ }    
+    public function isVisible(){ /*...*/ }    
+    public function setHeight( $height ){ /*...*/ }    
+    public function setId( String $id ){ /*...*/ }    
+    public function setName( String $name ){ /*...*/ }    
+    public function setReadOnly( $readOnly = true ){ /*...*/ }    
+    public function setStyleName( String $style ){ /*...*/ }    
+    public function setTitle( String $title ){ /*...*/ }    
+    public function setVisible( $visible = true ){ /*...*/ }    
+    public function setWidth( $width ){ /*...*/ }
+}
+
+abstract class rpo\gui\widget\base\Widget extends \rpo\gui\UIObject {    
+    private $father;    
+    protected function accept( Widget $component ) { /*...*/ }    
+    public function appendChild( Component $child ){ /*...*/ }    
+    public function getParent(){ /*...*/ }    
+    public function isOrphan(){ /*...*/ }    
+    public function removeChild( Component $child ) { /*...*/ }    
+    public function removeFromParent(){ /*...*/ }    
+    public function setOrphan(){ /*...*/ }    
+    public function setParent( Widget $father ){ /*...*/ }
+}
+
+abstract class rpo\gui\widget\base\SimpleWidget extends \rpo\gui\widget\base\Widget {    
+    final public function isLeaf() { /*...*/ }
+}
+
+abstract class rpo\gui\widget\base\ComplexWidget extends \rpo\gui\widget\base\Widget {    
+    final public function isLeaf() { /*...*/ }    
+    protected function drawAll() { /*...*/ }
+}
+
+abstract class rpo\gui\composite\Component extends \rpo\base\Object implements \IteratorAggregate {    
+    protected $children;    
+    public function __construct() { /*...*/ }    
+    public function appendChild( Component $component ) { /*...*/ }    
+    public function contains( Component $component ) { /*...*/ }    
+    abstract public function draw();    
+    public function getIterator() { /*...*/ }    
+    abstract public function isLeaf();    
+    public function removeChild( Component $child ) { /*...*/ }
+}
+}}}
