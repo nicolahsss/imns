@@ -1,0 +1,255 @@
+#summary Classes implementadas pelo projeto rpo
+
+=Resumo das classes=
+
+As seguintes classes são definidas no diretório rpo/
+
+{{{
+class rpo\mvc\ErrorView extends \rpo\base\Object implements \rpo\mvc\View {
+    private $exception;
+    private $response;
+    public function __construct( Exception $e ){ /* ... */ }
+    public function configure( HTTPResponse $response ){ /* ... */ }
+    public function show(){ /* ... */ }
+}
+
+class rpo\mvc\ControllerList extends \rpo\util\AbstractList {
+    protected function accept( BaseObject $object ) { /* ... */ }
+}
+
+final class rpo\mvc\Application extends \rpo\mvc\ControllerChain {
+    private $response;
+    public function __construct() { /* ... */ }
+    private function createErrorResponse( HTTPException $e ) { /* ... */ }
+    public function getResponse() { /* ... */ }
+    public function handle( HTTPRequest $request ) { /* ... */ }
+}
+
+final class rpo\http\HTTPResponse extends \rpo\base\Object implements \rpo\http\HTTPIO {
+    private static $instance;
+    private $body;
+    private $headers;
+    private function __construct() { /* ... */ }
+    public function getBody() { /* ... */ }
+    public function getHeaders() { /* ... */ }
+    public static function getInstance() { /* ... */ }
+    public function show() { /* ... */ }
+}
+
+final class rpo\mcv\HTTPRequest extends \rpo\base\Object implements \rpo\http\HTTPIO {
+    private static $instance;
+    private $headers;
+    private $body;
+    private $uri;
+    private function __construct( $base ) { /* ... */ }
+    public function getBody() { /* ... */ }
+    public function getHeaders() { /* ... */ }
+    public function getMethod() { /* ... */ }
+    public function getURI() { /* ... */ }
+    public static function getInstance( $base = '/' ) { /* ... */ }
+}
+
+class rpo\mvc\HTTPHeaderSet extends \rpo\util\AbstractSet {
+    public function __construct( array $headers = null ) { /* ... */ }
+    protected function accept( BaseObject $object ) { /* ... */ }
+    private function parse( array $headers ) { /* ... */ }
+}
+
+class rpo\http\HTTPBody extends \rpo\base\Object {
+    private $composite;
+    private $data;
+    public function __construct() { /* ... */ }
+    public function getComposite() { /* ... */ }
+    public function getData() { /* ... */ }
+}
+
+/* As classes
+	Authorization
+	CacheControl
+	Connection
+	ContentLanguage
+	ETag
+	Expect
+	Host
+	IfMatch
+	IfModifiedSince
+	IfNoneMatch
+	IfRange
+	IfUnmodifiedSince
+	KeepAlive
+	Location
+	MaxForwards
+	Pragma
+	ProxyAuthenticate
+	ProxyAuthorization
+	Range
+	Referer
+	RetryAfter
+	Server
+	TE
+	Trailer
+	TransferEncoding
+	Upgrade
+	UserAgent
+	Vary
+	Via
+	Warning
+	WWWAuthenticate
+da pasta rpo/http/header/fields seguem esse padrão: */
+class rpo\http\header\fields\(Classe) extends \rpo\http\header\AbstractHTTPHeaderField {
+    public function __construct( $value ) { /* ... */ }
+}
+
+/* As classes
+	From
+	Date
+	ContentLength
+	ContentType
+	LastModified
+	ContentRange
+	ContentEncoding
+	AcceptLanguage
+	Expires
+	ContentMD5
+	ContentLocation
+da pasta rpo/http/header/fields seguem esse padrão: */
+class rpo\http\header\fields\(Classe) extends \rpo\http\header\AbstractHTTPHeaderField {
+    public function __construct( $value ) { /* ... */ }
+    public function accept( $value ) { /* ... */ }
+}
+
+/* As classes
+	Accept
+	AcceptCharset
+	AcceptEncoding
+	AcceptLanguage
+	AcceptRanges
+	Age
+	Allow
+	XPoweredBy
+da pasta rpo/http/header/fields seguem esse padrão: */
+final class rpo\http\header\fields\(Classe) extends \rpo\http\header\AbstractHTTPPriorityHeaderField {
+    public function __construct( $value ) { /* ... */ }
+    public function accept( $value ) { /* ... */ }
+}
+
+/* As classes
+	BadGatewayException
+	GatewayTimeoutException
+	HttpVersionNotSupportedException
+	InternalServerErrorException
+	NotImplementedException
+	ServiceUnavailableException
+da pasta rpo/http/exception seguem esse padrão: */
+final class rpo\http\exception\GatewayTimeoutException extends \rpo\http\exception\AbstractServerException {
+    public function __construct( $message , Exception $previous = null ) { /* ... */ }
+}
+
+/* As classes
+	BadRequestExpection
+	ConflictExpection
+	ExpectationFailedExpection
+	ForbiddenExpection
+	GoneExpection
+	HTTPExpection
+	LengthRequiredException
+	MethodNotAllowedExpection
+	NotAcceptableExpection
+	NotFoundExpection
+	PreconditionFailedExpection
+	ProxyAuthenticationRequiredExpection
+	RequestEntityTooLargeExpection
+	RequestTimeoutExpection
+	RequestURITooLongExpection
+	RequestRangeNotSatisfiableExpection
+	UnauthorizedExpection
+da pasta rpo/http/exception seguem esse padrão: */
+final class rpo\http\exception\GatewayTimeoutException extends \rpo\http\exception\AbstractClientException {
+    public function __construct( $message , Exception $previous = null ) { /* ... */ }
+}
+
+class rpo\gui\HTMLPage extends \rpo\gui\widget\base\ComplexWidget {
+    private $charset;
+    private $language;
+    private $title;
+    public function __construct( String $title = null ){ /* ... */ }
+    public function getCharset(){ /* ... */ }
+    public function getLanguage(){ /* ... */ }
+    public function getTitle(){ /* ... */ }
+    public function draw(){ /* ... */ }
+    public function setCharset( String $charset ){ /* ... */ }
+    public function setLanguage( String $language ){ /* ... */ }
+    public function setTitle( String $title ){ /* ... */ }
+}
+
+class rpo\gui\widget\Paragraph extends \rpo\gui\widget\base\ComplexWidget {
+    private $text;
+    public function __construct( String $text = null ){ /* ... */ }
+    public function draw(){ /* ... */ }
+}
+
+class rpo\gui\widget\Heading extends \rpo\gui\widget\base\SimpleWidget {
+    private $level = 1;
+    private $heading;
+    public function __construct( String $heading , $level = 1 ){ /* ... */ }
+    public function draw(){ /* ... */ }
+}
+
+class rpo\gui\widget\panel\SimplePanel extends \rpo\gui\widget\base\ComplexWidget implements Panel {
+    public function count(){ /* ... */ }
+    public function clear() { /* ... */ }
+    public function draw() { /* ... */ }
+    protected function getTagName(){ /* ... */ }
+}
+
+final class rpo\gui\widget\panel\RootPanel extends \rpo\gui\widget\panel\SimplePanel {
+    protected function accept( Widget $component ) { /* ... */ }
+    public function draw() { /* ... */ }
+    public function setParent( Widget $father ){ /* ... */ }
+}
+
+class rpo\gui\composite\ComponentList extends \rpo\util\AbstractList {
+    protected function accept( BaseObject $object ) { /* ... */ }
+}
+
+class rpo\base\String extends \rpo\base\Object {
+    private static $encoding;
+    private $storage;
+    public function __construct( $string = '' ) { /* ... */ }
+    public function __toString() { /* ... */ }
+    public function __get( $name ) { /* ... */ }
+    public function charAt( $offset ) { /* ... */ }
+    public function charCodeAt( $offset ) { /* ... */ }
+    public function compareTo( String $string ) { /* ... */ }
+    public function compareToCaseIgnore( String $string ) { /* ... */ }
+    public function concat( String $string ) { /* ... */ }
+    public function convertEncoding( $encoding ) { /* ... */ }
+    public function equals( BaseObject $o ) { /* ... */ }
+    public function endsWith( String $string ) { /* ... */ }
+    public function format( String $format , Object $args ) { /* ... */ }
+    public static function getDefaultEncoding(){ /* ... */ }
+    public function getEncoding() { /* ... */ }
+    public function indexOf( $needle , $fromIndex = 0 , $ignoreCase = false ) { /* ... */ }
+    public function isEmpty() { /* ... */ }
+    public function lastIndexOf( $needle , $fromIndex = 0 , $ignoreCase = false ) { /* ... */ }
+    public function replace( $pattern , $replacement ) { /* ... */ }
+    public function startsWith( String $string , $fromIndex = 0 ) { /* ... */ }
+    public function substring( $startIndex , $lastIndex = null ) { /* ... */ }
+    public function split( $pattern , $limit = PHP_INT_MAX ) { /* ... */ }
+    public function toCharArray() { /* ... */ }
+    public function toLowerCase() { /* ... */ }
+    public function toUpperCase() { /* ... */ }
+    public function ltrim() { /* ... */ }
+    public function rtrim() { /* ... */ }
+    public function trim() { /* ... */ }
+    public function toNumericEntity( array $map = array( 0x80 , 0xff , 0 , 0xff ) ) { /* ... */ }
+    public static function setDefaultEncoding( $encoding ) { /* ... */ }
+    private static function testEncoding( &$encoding ) { /* ... */ }
+}
+
+class rpo\base\Object extends \stdClass implements \rpo\base\BaseObject {
+    public function getClass() { /* ... */ }
+    public function equals( BaseObject $object ) { /* ... */ }
+    public function hashCode() { /* ... */ }
+}
+}}}
