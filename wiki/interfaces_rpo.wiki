@@ -1,8 +1,8 @@
-#summary Interfaces implementadas pelo projeto [http://code.google.com/p/rpo rpo]
+#summary Interfaces implementadas pelo projeto
 
 =Resumo das interfaces=
 
-As seguintes interfaces estão definidas no diretório rpo/
+As seguintes interfaces são definidas no diretório rpo/
 
 {{{
 interface rpo\util\Set extends \rpo\util\Collection {
